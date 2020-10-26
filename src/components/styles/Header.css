@@ -1,0 +1,255 @@
+.header {
+  position: relative;
+  top: 0;
+  left: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 99vh;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+.Nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  top: 0%;
+  width: 100%;
+  z-index: 5;
+  /* background-color: white; */
+}
+
+.Search-Bar {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  top: 30vh;
+  left: 20vw;
+  margin: auto;
+  /* transform: translate(-50%, -50%); */
+  flex-wrap: nowrap;
+}
+
+.Bar {
+  display: flex;
+  border: 1px solid lightgray;
+  border-radius: 999px;
+  height: 70px;
+  background-color: white;
+  width: fit-content;
+}
+
+.location,
+.Check-in,
+.Check-out,
+.Guest-count > p {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 600;
+}
+
+.location {
+  position: relative;
+  display: inline;
+  margin: auto;
+  width: fit-content;
+  margin-right: 30px;
+  margin-left: 30px;
+  border-radius: 1000px;
+}
+
+.location > input {
+  position: relative;
+  border-radius: 1000px;
+  outline: none;
+  border: none;
+  width: 180px;
+}
+
+.Check-in {
+  position: relative;
+  display: inline;
+  margin: auto;
+  width: fit-content;
+  margin-right: 30px;
+}
+
+.Check-in > input {
+  outline: none;
+  border: none;
+  width: 89%;
+}
+.Check-out {
+  position: relative;
+  display: inline;
+  margin: auto;
+  width: fit-content;
+  margin-right: 30px;
+}
+
+.Check-out > input {
+  outline: none;
+  border: none;
+  width: 89%;
+}
+
+.Guest-count {
+  position: relative;
+  display: inline;
+  margin: auto;
+  width: fit-content;
+  margin-right: 30px;
+}
+
+.add-guest-span {
+  font-weight: 500;
+  color: gray;
+  font-size: 13px;
+}
+
+.search-icon {
+  position: relative;
+  /* display: inline; */
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  border-radius: 100%;
+  /* padding: 10px; */
+  /* width: max-content; */
+  margin-right: 10px;
+  background-color: darkblue;
+}
+
+.search-icon > span {
+  position: relative;
+  top: -6px;
+  left: -1px;
+  padding-left: 5px;
+  margin: auto;
+}
+
+.search-icon > svg {
+  position: relative;
+  top: 25%;
+  left: 25%;
+  margin: auto;
+}
+
+.search-icon:hover {
+  transition: ease;
+  background-color: rgb(16, 16, 182);
+}
+
+.Header-brand {
+  position: relative;
+  margin-left: 10px;
+  padding: 20px;
+  font-weight: 700;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 30px;
+}
+
+.guest-menu {
+  position: absolute;
+  top: 80px;
+  right: 0px;
+  border-radius: 20px;
+  padding: 2%;
+  width: 300px;
+  background-color: white;
+  height: fit-content;
+}
+
+.guest-menu-adult,
+.guest-menu-childern,
+.guest-menu-infant {
+  position: relative;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 10px;
+  height: 50px;
+}
+.guest-menu-infant {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 5px;
+}
+
+.number-icon {
+  position: absolute;
+  display: flex;
+  margin: auto;
+  right: 0%;
+}
+
+.number-icon > p {
+  position: relative;
+  left: -20px;
+  margin: auto;
+}
+
+.plus-icon {
+  border-radius: 100%;
+  position: relative;
+  margin: auto;
+  border: 1px solid lightgray;
+  height: 30px;
+  width: 30px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: gray;
+}
+.plus-icon > svg {
+  position: relative;
+  margin: auto;
+  margin-top: 3px;
+}
+
+.header-image {
+  height: 99vh;
+  width: 100vw;
+  position: absolute;
+  top: 0px;
+}
+
+.header-icon {
+  object-fit: contain;
+  height: 80px;
+  margin-left: 20px;
+}
+
+.header-center {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  max-width: fit-content;
+  padding: 5px;
+  height: 30px;
+  border: 1px solid lightgray;
+  border-radius: 999px;
+}
+
+.header-center > input {
+  border: none;
+  width: 250px;
+  outline-width: 0px;
+  outline: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 18vw;
+  margin-right: 50px;
+}
