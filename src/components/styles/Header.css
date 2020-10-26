@@ -29,13 +29,13 @@
   top: 30vh;
   left: 20vw;
   margin: auto;
+  border: none;
   /* transform: translate(-50%, -50%); */
   flex-wrap: nowrap;
 }
 
 .Bar {
   display: flex;
-  border: 1px solid lightgray;
   border-radius: 999px;
   height: 70px;
   background-color: white;
