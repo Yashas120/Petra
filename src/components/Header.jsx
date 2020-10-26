@@ -6,6 +6,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Avatar } from "@material-ui/core";
 import { ReactiveBase } from "@appbaseio/reactivesearch";
 import AddIcon from "@material-ui/icons/Add";
+import SubIcon from "@material-ui/icons/Remove";
 
 function Header() {
   const [showDiv, setShowDiv] = useState(false);
@@ -62,6 +63,24 @@ function Header() {
             <div className="guest-menu-adult">
               <p>Adults</p>
               <div className="number-icon">
+                {(adultNumber != 0 &&
+                  !(
+                    (childernNumber >= 1 || infantNumber >= 1) &&
+                    adultNumber == 1
+                  )) ||
+                (adultNumber >= 1 &&
+                  infantNumber == 0 &&
+                  childernNumber == 0) ? (
+                  <div className="Sub-icon">
+                    <SubIcon
+                      onClick={() => {
+                        setAdultNumber((prevState) => {
+                          return prevState - 1;
+                        });
+                      }}
+                    ></SubIcon>
+                  </div>
+                ) : null}
                 <p>{adultNumber}</p>
                 <div className="plus-icon">
                   <AddIcon
@@ -77,31 +96,58 @@ function Header() {
             <div className="guest-menu-childern">
               <p>Childern</p>
               <div className="number-icon">
+                {childernNumber >= 1 && adultNumber > 0 ? (
+                  <div className="Sub-icon">
+                    <SubIcon
+                      onClick={() => {
+                        setChildernNumber((prevState) => {
+                          return prevState - 1;
+                        });
+                      }}
+                    ></SubIcon>
+                  </div>
+                ) : null}
                 <p>{childernNumber}</p>
-                <div className="plus-icon">
-                  <AddIcon
-                    onClick={() => {
-                      setChildernNumber((prevState) => {
-                        return prevState + 1;
-                      });
-                    }}
-                  ></AddIcon>
-                </div>
+
+                {childernNumber >= 0 && adultNumber >= 1 ? (
+                  <div className="plus-icon">
+                    <AddIcon
+                      onClick={() => {
+                        setChildernNumber((prevState) => {
+                          return prevState + 1;
+                        });
+                      }}
+                    ></AddIcon>
+                  </div>
+                ) : null}
               </div>
             </div>
             <div className="guest-menu-infant">
               <p>Infants</p>
               <div className="number-icon">
+                {infantNumber >= 1 && adultNumber > 0 ? (
+                  <div className="Sub-icon">
+                    <SubIcon
+                      onClick={() => {
+                        setInfantNumber((prevState) => {
+                          return prevState - 1;
+                        });
+                      }}
+                    ></SubIcon>
+                  </div>
+                ) : null}
                 <p>{infantNumber}</p>
-                <div className="plus-icon">
-                  <AddIcon
-                    onClick={() => {
-                      setInfantNumber((prevState) => {
-                        return prevState + 1;
-                      });
-                    }}
-                  ></AddIcon>
-                </div>
+                {infantNumber >= 0 && adultNumber >= 1 ? (
+                  <div className="plus-icon">
+                    <AddIcon
+                      onClick={() => {
+                        setInfantNumber((prevState) => {
+                          return prevState + 1;
+                        });
+                      }}
+                    ></AddIcon>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>

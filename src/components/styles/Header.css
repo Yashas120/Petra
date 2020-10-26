@@ -207,12 +207,41 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  vertical-align: middle;
   color: gray;
 }
+
 .plus-icon > svg {
   position: relative;
+  top: 3px;
   margin: auto;
-  margin-top: 3px;
+}
+
+.plus-icon,
+.Sub-icon > svg {
+  position: relative;
+  margin: auto;
+  vertical-align: middle;
+}
+
+.Sub-icon {
+  border-radius: 100%;
+  position: relative;
+  left: -45px;
+  margin: auto;
+  border: 1px solid lightgray;
+  height: 30px;
+  width: 30px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: gray;
+}
+
+.Sub-icon > svg {
+  position: relative;
+  vertical-align: middle;
+  top: 3px;
 }
 
 .header-image {
