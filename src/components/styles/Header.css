@@ -68,6 +68,10 @@
   width: 180px;
 }
 
+.location :hover {
+  cursor: pointer;
+}
+
 .Check-in {
   position: relative;
   display: inline;
@@ -95,12 +99,26 @@
   width: 89%;
 }
 
+.Check-in,
+.Check-out :hover {
+  cursor: pointer;
+}
+.Check-in > input :hover {
+  cursor: pointer;
+}
+.Check-out > .datepickero :hover {
+  cursor: pointer;
+}
+
 .Guest-count {
   position: relative;
   display: inline;
   margin: auto;
   width: fit-content;
   margin-right: 30px;
+}
+.Guest-count :hover {
+  cursor: pointer;
 }
 
 .add-guest-span {
@@ -143,6 +161,7 @@
 
 .search-icon:hover {
   transition: ease;
+  cursor: pointer;
   background-color: rgb(16, 16, 182);
 }
 
@@ -168,7 +187,8 @@
 
 .guest-menu-adult,
 .guest-menu-childern,
-.guest-menu-infant {
+.guest-menu-infant,
+.guest-menu-pet {
   position: relative;
   display: flex;
   justify-items: center;
@@ -178,7 +198,7 @@
   padding-bottom: 10px;
   height: 50px;
 }
-.guest-menu-infant {
+.guest-menu-pet {
   border-bottom: none;
   padding-bottom: 0;
   margin-bottom: 5px;

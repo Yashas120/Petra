@@ -4,7 +4,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import LanguageIcon from "@material-ui/icons/Language";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Avatar } from "@material-ui/core";
-import { ReactiveBase } from "@appbaseio/reactivesearch";
 import AddIcon from "@material-ui/icons/Add";
 import SubIcon from "@material-ui/icons/Remove";
 
@@ -13,6 +12,7 @@ function Header() {
   const [adultNumber, setAdultNumber] = useState(0);
   const [childernNumber, setChildernNumber] = useState(0);
   const [infantNumber, setInfantNumber] = useState(0);
+  const [petNumber, setPetNumber] = useState(0);
   return (
     <div className="header">
       <section className="Nav-bar">
@@ -27,7 +27,12 @@ function Header() {
       <section className="Search-Bar">
         <form>
           <div className="Bar">
-            <div className="location">
+            <div
+              className="location"
+              onClick={() => {
+                document.querySelector(".location-input").focus();
+              }}
+            >
               <p>Location</p>
               <input
                 type="text"
@@ -35,18 +40,32 @@ function Header() {
                 placeholder="Where are you going?"
               ></input>
             </div>
-            <div className="Check-in">
+            <div
+              className="Check-in"
+              onClick={() => {
+                document.querySelector(".datePickeri").focus();
+              }}
+            >
               <p>Check In</p>
-              <input type="date" className="datePicker"></input>
+              <input type="date" className="datePickeri"></input>
             </div>
-            <div className="Check-out">
+            <div
+              className="Check-out"
+              onClick={() => {
+                document.querySelector(".datePickero").focus();
+              }}
+            >
               <p>Check Out</p>
-              <input type="date" className="datePicker"></input>
+              <input type="date" className="datePickero"></input>
             </div>
             <div
               className="Guest-count"
               onClick={() => {
-                setShowDiv(true);
+                if (!showDiv) {
+                  setShowDiv(true);
+                } else {
+                  setShowDiv(false);
+                }
               }}
             >
               <p>Guests</p>
@@ -63,14 +82,14 @@ function Header() {
             <div className="guest-menu-adult">
               <p>Adults</p>
               <div className="number-icon">
-                {(adultNumber != 0 &&
+                {(adultNumber !== 0 &&
                   !(
                     (childernNumber >= 1 || infantNumber >= 1) &&
-                    adultNumber == 1
+                    adultNumber === 1
                   )) ||
                 (adultNumber >= 1 &&
-                  infantNumber == 0 &&
-                  childernNumber == 0) ? (
+                  infantNumber === 0 &&
+                  childernNumber === 0) ? (
                   <div className="Sub-icon">
                     <SubIcon
                       onClick={() => {
@@ -150,6 +169,34 @@ function Header() {
                 ) : null}
               </div>
             </div>
+            <div className="guest-menu-pet">
+              <p>Pets</p>
+              <div className="number-icon">
+                {petNumber >= 1 && adultNumber >= 0 ? (
+                  <div className="Sub-icon">
+                    <SubIcon
+                      onClick={() => {
+                        setPetNumber((prevState) => {
+                          return prevState - 1;
+                        });
+                      }}
+                    ></SubIcon>
+                  </div>
+                ) : null}
+                <p>{petNumber}</p>
+                {petNumber >= 0 && adultNumber >= 0 ? (
+                  <div className="plus-icon">
+                    <AddIcon
+                      onClick={() => {
+                        setPetNumber((prevState) => {
+                          return prevState + 1;
+                        });
+                      }}
+                    ></AddIcon>
+                  </div>
+                ) : null}
+              </div>
+            </div>
           </div>
         ) : null}
       </section>
@@ -159,6 +206,11 @@ function Header() {
           src="./mountain.png"
           alt="mountain-image"
           className="header-image"
+          onClick={() => {
+            if (showDiv) {
+              setShowDiv(false);
+            }
+          }}
         ></img>
       </section>
     </div>
