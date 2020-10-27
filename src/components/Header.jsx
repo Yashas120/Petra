@@ -6,6 +6,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Avatar } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import SubIcon from "@material-ui/icons/Remove";
+import DatePicker from "./DatePicker";
 
 function Header() {
   const [showDiv, setShowDiv] = useState(false);
@@ -13,6 +14,7 @@ function Header() {
   const [childernNumber, setChildernNumber] = useState(0);
   const [infantNumber, setInfantNumber] = useState(0);
   const [petNumber, setPetNumber] = useState(0);
+
   return (
     <div className="header">
       <section className="Nav-bar">
@@ -40,23 +42,13 @@ function Header() {
                 placeholder="Where are you going?"
               ></input>
             </div>
-            <div
-              className="Check-in"
-              onClick={() => {
-                document.querySelector(".datePickeri").focus();
-              }}
-            >
+            <div className="Check-in">
               <p>Check In</p>
-              <input type="date" className="datePickeri"></input>
+              <DatePicker date={new Date()}></DatePicker>
             </div>
-            <div
-              className="Check-out"
-              onClick={() => {
-                document.querySelector(".datePickero").focus();
-              }}
-            >
+            <div className="Check-out">
               <p>Check Out</p>
-              <input type="date" className="datePickero"></input>
+              <DatePicker date={null}></DatePicker>
             </div>
             <div
               className="Guest-count"
@@ -73,7 +65,6 @@ function Header() {
             </div>
             <div className="search-icon">
               <SearchIcon></SearchIcon>
-              {/* <span>Search</span> */}
             </div>
           </div>
         </form>
