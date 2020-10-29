@@ -10,6 +10,7 @@ import Clear from "@material-ui/icons/ClearRounded";
 import Hamburger from "@material-ui/icons/MenuRounded";
 import DatePicker from "./DatePicker";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [showDiv, setShowDiv] = useState(false);
@@ -28,19 +29,17 @@ function Header() {
   const [showProfileDiv, setShowProfileDiv] = useState(false);
   const [showLangDiv, setShowLangDiv] = useState(false);
 
-  // useEffect(() => {
-  //   // axios
-  //   //   .get(
-  //   //     `Link`
-  //   //   )
-  //   //   .then((response) => {
-  //   //     console.log(response.data);
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     console.log(error);
-  //   //   });
-  //   // Not working
-  // });
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/`)
+      .then((response) => {
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // Not working
+  });
 
   return (
     <div className="header">
@@ -50,8 +49,10 @@ function Header() {
           <div
             className="language-div"
             onClick={() => {
-              if (!showLangDiv) setShowLangDiv(true);
-              else setShowLangDiv(false);
+              if (!showLangDiv) {
+                setShowLangDiv(true);
+                if (showProfileDiv) setShowProfileDiv(false);
+              } else setShowLangDiv(false);
             }}
           >
             <div>
@@ -68,8 +69,10 @@ function Header() {
           <div
             className="profile"
             onClick={() => {
-              if (!showProfileDiv) setShowProfileDiv(true);
-              else {
+              if (!showProfileDiv) {
+                setShowProfileDiv(true);
+                if (showLangDiv) setShowLangDiv(false);
+              } else {
                 setShowProfileDiv(false);
               }
             }}
@@ -79,7 +82,9 @@ function Header() {
           </div>
           {showProfileDiv ? (
             <div className="profile-div">
-              <p>Sign Up</p>
+              <p>
+                <Link to="/signup">Sign Up</Link>
+              </p>
               <p>Log in</p>
             </div>
           ) : null}
@@ -151,6 +156,7 @@ function Header() {
                     document.querySelector(
                       ".location-input"
                     ).value = suggestions;
+                    setShowSearchSuggestions(false);
                   }}
                 >
                   {suggestions}
