@@ -2,6 +2,11 @@ a {
   text-decoration: none;
   color: black;
 }
+
+a :hover {
+  color: rgb(83, 83, 83);
+}
+
 .header {
   position: relative;
   top: 0;

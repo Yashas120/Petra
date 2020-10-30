@@ -30,14 +30,14 @@ function Header() {
   const [showLangDiv, setShowLangDiv] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/`)
-      .then((response) => {
-        // console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .get(`http://localhost:3000/`)
+    //   .then((response) => {
+    //     // console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     // Not working
   });
 
@@ -83,9 +83,15 @@ function Header() {
           {showProfileDiv ? (
             <div className="profile-div">
               <p>
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/signup">
+                  <span className="login-signup-link">Sign Up</span>
+                </Link>
               </p>
-              <p>Log in</p>
+              <p>
+                <Link to="/login">
+                  <span className="login-signup-link">Log in</span>
+                </Link>
+              </p>
             </div>
           ) : null}
         </div>
@@ -291,7 +297,7 @@ function Header() {
 
       <section className="header-img">
         <img
-          src="./mountain.png"
+          src="/mountain.png"
           alt="mountain-img"
           className="header-image"
           onClick={() => {

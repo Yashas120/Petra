@@ -23,6 +23,11 @@ function App() {
             <Home></Home>
             <Footer></Footer>
           </Route>
+          <Route exact path="/auth/google/account">
+            <Header></Header>
+            <Home></Home>
+            <Footer></Footer>
+          </Route>
         </Switch>
       </Router>
     </div>
