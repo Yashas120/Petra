@@ -10,7 +10,7 @@ import {
 
 function DatePicker(props) {
   const [selectedDate, setSelectedDate] = useState(props.date);
-  const handleDateChnage = (date) => {
+  const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
@@ -24,8 +24,9 @@ function DatePicker(props) {
             margin="normal"
             id="date-picker"
             format="MM/dd/yyyy"
+            disablePast
             value={selectedDate}
-            onChange={handleDateChnage}
+            onChange={handleDateChange}
             InputProps={{
               disableUnderline: true,
             }}

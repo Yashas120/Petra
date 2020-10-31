@@ -19,6 +19,7 @@ function Header() {
   const [childernNumber, setChildernNumber] = useState(0);
   const [infantNumber, setInfantNumber] = useState(0);
   const [petNumber, setPetNumber] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchValue, setSearchValue] = useState([
     "Banaglore, India",
     "Mysore, India",
@@ -26,6 +27,8 @@ function Header() {
     "Delhi, India",
     "Chennai, India",
   ]);
+  // const [sdate, setSDate] = useState(new Date());
+  // const [edate, setEDate] = useState(new Date());
   const [showProfileDiv, setShowProfileDiv] = useState(false);
   const [showLangDiv, setShowLangDiv] = useState(false);
 
@@ -131,7 +134,7 @@ function Header() {
             </div>
             <div className="Check-out">
               <p>Check Out</p>
-              <DatePicker date={null}></DatePicker>
+              <DatePicker date={new Date()}></DatePicker>
             </div>
             <div
               className="Guest-count"
@@ -147,7 +150,20 @@ function Header() {
               <span className="add-guest-span">Add guests</span>
             </div>
             <div className="search-icon">
-              <SearchIcon></SearchIcon>
+              <Link
+                to={{
+                  pathname: "/search",
+                  props: {
+                    searchLocation: searchQuery,
+                    numberOfGuests: adultNumber + childernNumber + infantNumber,
+                    pets: petNumber,
+                    // sdate: `${sdate}`.substring(4, 15),
+                    // edate: document.querySelectorAll("#date-picker")[1].value,
+                  },
+                }}
+              >
+                <SearchIcon></SearchIcon>
+              </Link>
             </div>
           </div>
         </form>
@@ -158,10 +174,12 @@ function Header() {
                 <div
                   className="suggestion-items"
                   id={index}
+                  key={index}
                   onClick={() => {
                     document.querySelector(
                       ".location-input"
                     ).value = suggestions;
+                    setSearchQuery(suggestions);
                     setShowSearchSuggestions(false);
                   }}
                 >

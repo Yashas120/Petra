@@ -6,15 +6,16 @@ import SearchPage from "./components/SearchPage";
 import SignUp from "./components/SignUp";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/search">
-            <SearchPage></SearchPage>
-            <Footer></Footer>
-          </Route>
+          <Route
+            exact
+            path="/search"
+            render={(props) => <SearchPage {...props}></SearchPage>}
+          ></Route>
           <Route exact path="/signup">
             <SignUp></SignUp>
           </Route>

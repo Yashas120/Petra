@@ -3,11 +3,15 @@ import "./styles/searchPage.css";
 import { Button } from "@material-ui/core";
 import SearchResult from "./SearchResult";
 
-function SearchPage() {
+function SearchPage(props) {
   return (
     <div className="searchPage">
       <div className="searchPage__info">
-        <p>62 stays · 26 august to 30 august · 2 guest</p>
+        <p>
+          62 stays in {props.location.props.searchLocation} ·{" "}
+          {props.location.props.numberOfGuests} Guests ·{" "}
+          {props.location.props.pets} Pet
+        </p>
         <h1>Stays nearby</h1>
         <Button variant="outlined">Cancellation Flexibility</Button>
         <Button variant="outlined">Type of place</Button>
