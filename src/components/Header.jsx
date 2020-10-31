@@ -12,7 +12,7 @@ import DatePicker from "./DatePicker";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header(props) {
   const [showDiv, setShowDiv] = useState(false);
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
   const [adultNumber, setAdultNumber] = useState(0);
@@ -31,6 +31,7 @@ function Header() {
   // const [edate, setEDate] = useState(new Date());
   const [showProfileDiv, setShowProfileDiv] = useState(false);
   const [showLangDiv, setShowLangDiv] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(props.LoggedIn);
 
   useEffect(() => {
     // axios
@@ -83,7 +84,7 @@ function Header() {
             <Hamburger className="menu-icon"></Hamburger>
             <Avatar className="profile-photo"></Avatar>
           </div>
-          {showProfileDiv ? (
+          {showProfileDiv && !isLoggedIn ? (
             <div className="profile-div">
               <p>
                 <Link to="/signup">
@@ -93,6 +94,26 @@ function Header() {
               <p>
                 <Link to="/login">
                   <span className="login-signup-link">Log in</span>
+                </Link>
+              </p>
+            </div>
+          ) : null}
+          {showProfileDiv && isLoggedIn ? (
+            <div className="profile-div">
+              <p>
+                <Link to="/account">
+                  <span className="login-signup-link">Profile</span>
+                </Link>
+              </p>
+              <p>
+                <Link
+                  to="/"
+                  onClick={() => {
+                    setIsLoggedIn(false);
+                    setShowProfileDiv(false);
+                  }}
+                >
+                  <span className="login-signup-link">Sign Out</span>
                 </Link>
               </p>
             </div>

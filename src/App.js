@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SearchPage from "./components/SearchPage";
 import SignUp from "./components/SignUp";
+import Profile from "./components/Profile";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App(props) {
@@ -20,14 +21,18 @@ function App(props) {
             <SignUp></SignUp>
           </Route>
           <Route exact path="/">
-            <Header></Header>
+            <Header LoggedIn={false}></Header>
             <Home></Home>
             <Footer></Footer>
           </Route>
           <Route exact path="/auth/google/account">
-            <Header></Header>
+            <Header LoggedIn={true}></Header>
             <Home></Home>
             <Footer></Footer>
+          </Route>
+          <Route exact path="/account">
+            <Profile></Profile>
+            {/* <Footer></Footer> */}
           </Route>
         </Switch>
       </Router>
