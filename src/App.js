@@ -15,7 +15,12 @@ function App() {
           <Route
             exact
             path="/search"
-            render={(props) => <SearchPage {...props}></SearchPage>}
+            render={(props) => (
+              <div>
+                <SearchPage {...props}></SearchPage>
+                <Footer></Footer>
+              </div>
+            )}
           ></Route>
           <Route exact path="/signup">
             <SignUp type="up"></SignUp>
