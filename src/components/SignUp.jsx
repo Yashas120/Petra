@@ -3,7 +3,7 @@ import axios from "axios";
 import "./styles/SignUp.css";
 import { Redirect } from "react-router-dom";
 
-function SignUp() {
+function SignUp(props) {
   const [LoggedIn, setLoggedIn] = useState(false);
 
   return (
@@ -13,7 +13,7 @@ function SignUp() {
         <p>Where journey begins.</p>
       </div>
       <div className="right-container">
-        <p>Please sign up using the following option.</p>
+        <p>Please sign {props.type} using the following option.</p>
         <div
           className="signup-button"
           onClick={() => {
@@ -29,7 +29,7 @@ function SignUp() {
           }}
         >
           <img className="google-btn" src="./google.svg" alt="google"></img>
-          <p>Sign Up with Google</p>
+          <p>Sign {props.type} with Google</p>
           {LoggedIn ? <Redirect to="/auth/google/account"></Redirect> : null}
         </div>
       </div>

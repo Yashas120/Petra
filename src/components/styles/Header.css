@@ -259,6 +259,7 @@ a :hover {
   border-radius: 100%;
   margin-right: 10px;
   background-color: darkblue;
+  display: inline;
 }
 
 .search-icon > span {
@@ -274,6 +275,19 @@ a :hover {
   top: 25%;
   left: 25%;
   margin: auto;
+}
+
+.search-icon-svg {
+  position: relative;
+  top: 12px;
+  left: 12px;
+  color: white;
+  margin: 0;
+  padding: 0%;
+}
+
+.search-icon-svg :hover {
+  color: white;
 }
 
 .search-icon:hover {

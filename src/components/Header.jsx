@@ -101,7 +101,14 @@ function Header(props) {
           {showProfileDiv && isLoggedIn ? (
             <div className="profile-div">
               <p>
-                <Link to="/account">
+                <Link
+                  to={{
+                    pathname: "/account",
+                    props: {
+                      Name: "Vishal R",
+                    },
+                  }}
+                >
                   <span className="login-signup-link">Profile</span>
                 </Link>
               </p>
@@ -175,13 +182,16 @@ function Header(props) {
                 to={{
                   pathname: "/search",
                   props: {
-                    searchLocation: searchQuery,
+                    searchLocation: `${
+                      searchQuery === "" ? "Nearby" : searchQuery
+                    }`,
                     numberOfGuests: adultNumber + childernNumber + infantNumber,
                     pets: petNumber,
                     // sdate: `${sdate}`.substring(4, 15),
                     // edate: document.querySelectorAll("#date-picker")[1].value,
                   },
                 }}
+                className="search-icon-svg"
               >
                 <SearchIcon></SearchIcon>
               </Link>

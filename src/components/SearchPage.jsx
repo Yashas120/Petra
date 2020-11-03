@@ -13,11 +13,6 @@ function SearchPage(props) {
           {props.location.props.pets} Pet
         </p>
         <h1>Stays nearby</h1>
-        <Button variant="outlined">Cancellation Flexibility</Button>
-        <Button variant="outlined">Type of place</Button>
-        <Button variant="outlined">Price</Button>
-        <Button variant="outlined">Rooms and beds</Button>
-        <Button variant="outlined">More filters</Button>
       </div>
       <SearchResult
         img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"

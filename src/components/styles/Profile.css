@@ -10,7 +10,7 @@
 }
 
 .side-bar {
-  background-color: darkblue;
+  background-color: rgba(67, 67, 179, 0.856);
   color: white;
   font-family: Helvetica, Arial, sans-serif;
   position: absolute;
@@ -33,9 +33,12 @@
 }
 
 .side-bar > h3 {
-  position: absolute;
-  top: 55%;
+  position: relative;
+  top: 20px;
+  left: -10px;
   font-family: Helvetica, Arial, sans-serif;
+  margin: 0px;
+  color: white;
 }
 
 .side-bar > img {
@@ -53,12 +56,20 @@
   align-items: center;
   height: fit-content;
   width: 100%;
+  display: flexbox;
 }
 
 .side-bar-items > p {
   margin: 10px;
   padding: 5%;
   margin-left: 50px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.sign-out-btn,
+.back-btn,
+.close-account-btn {
+  color: white;
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -84,8 +95,6 @@
 .tab-items {
   margin: auto;
   height: fit-content;
-  /* margin-right: 100px; */
-  /* padding-left: 10%; */
   width: max-content;
   font-family: Helvetica, Arial, sans-serif;
 }

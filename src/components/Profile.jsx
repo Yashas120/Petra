@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./styles/Profile.css";
 import SearchResult from "./SearchResult";
-function Profile() {
+import { Link } from "react-router-dom";
+
+function Profile(props) {
   const [currentBookings, setCurrentBookings] = useState(true);
   const [previousBookings, setPreviousBookings] = useState(false);
   return (
@@ -13,11 +15,26 @@ function Profile() {
           alt="mountain"
           className="profile-picture"
         ></img>
-        <h3>Account</h3>
+        <h3>{props.location.props.Name}</h3>
         <div className="side-bar-items">
-          <p>Name</p>
-          <p>Sign Out</p>
-          <p>Close Account</p>
+          <p>
+            <Link to="/auth/google/account" className="back-btn">
+              Back
+            </Link>
+          </p>
+          <p>
+            <Link to="/" className="sign-out-btn">
+              Sign Out
+            </Link>
+          </p>
+          <p>
+            <Link
+              to="/auth/google/delete/account"
+              className="close-account-btn"
+            >
+              Close Account
+            </Link>
+          </p>
         </div>
       </div>
       <div className="right-container-account">
@@ -125,7 +142,6 @@ function Profile() {
           ) : null}
         </div>
       </div>
-      <p>Hello From Profile!</p>
     </div>
   );
 }
