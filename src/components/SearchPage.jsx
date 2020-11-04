@@ -1,40 +1,11 @@
 import React from "react";
 import "./styles/searchPage.css";
-import { Button } from "@material-ui/core";
 import SearchResult from "./SearchResult";
-import $ from "jquery";
+import ScrollBar from "react-smooth-scrollbar";
 
 function SearchPage(props) {
-  function handleScroll() {
-    window.addEventListener("scroll", () => {
-      console.log(window.innerHeight);
-      const scrollableHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
-      const replaceHeight = scrollableHeight - 110;
-      if (scrolled >= replaceHeight) {
-        document
-          .querySelector(".Map-component")
-          .setAttribute(
-            "style",
-            `position : absolute; height : ${100}%; right : 0px; background-color: pink; width: 35%; top: ${
-              scrollableHeight - 95
-            }px; transition:  ease-in-out;`
-          );
-      } else {
-        document
-          .querySelector(".Map-component")
-          .setAttribute(
-            "style",
-            `position : absolute; height : 101%; right : 0px; background-color: pink; width: 35%; top:${scrolled}px; transition: ease-in-out;`
-          );
-      }
-    });
-  }
-
   return (
-    <div onLoad={handleScroll}>
-      <div className="Map-component">Map Component</div>
+    <div className="Wrapper">
       <div className="searchPage">
         <div className="searchPage__info">
           <p>
@@ -146,6 +117,7 @@ function SearchPage(props) {
           />
         </div>
       </div>
+      <div className="Map-component">Map Component</div>
     </div>
   );
 }

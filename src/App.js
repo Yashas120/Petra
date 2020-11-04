@@ -6,6 +6,9 @@ import SearchPage from "./components/SearchPage";
 import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Scrollbar from "smooth-scrollbar";
+import ScrollBar from "react-smooth-scrollbar";
+import { useEffect } from "react";
 
 function App() {
   return (
