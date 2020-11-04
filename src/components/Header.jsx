@@ -10,7 +10,9 @@ import Clear from "@material-ui/icons/ClearRounded";
 import Hamburger from "@material-ui/icons/MenuRounded";
 import DatePicker from "./DatePicker";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import { data } from "jquery";
 
 function Header(props) {
   const [showDiv, setShowDiv] = useState(false);
@@ -32,18 +34,50 @@ function Header(props) {
   const [showProfileDiv, setShowProfileDiv] = useState(false);
   const [showLangDiv, setShowLangDiv] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(props.LoggedIn);
-
-  useEffect(() => {
-    // axios
-    //   .get(`http://localhost:3000/`)
-    //   .then((response) => {
-    //     // console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // Not working
-  });
+  const history = useHistory();
+  function handleSearch() {
+    const data = {
+      Query: searchQuery,
+      SDate: document.querySelectorAll("#date-picker")[0].value,
+      EDate: document.querySelectorAll("#date-picker")[1].value,
+      Guests: adultNumber + childernNumber + infantNumber + petNumber,
+      Adults: adultNumber,
+      Childern: childernNumber,
+      Infants: infantNumber,
+      Pets: petNumber,
+      LoggedIn: isLoggedIn,
+    };
+    if (!isLoggedIn)
+      axios
+        .post("http://localhost:3001/search/", data)
+        .then((response) => {
+          const results = response.data.results;
+          history.push({
+            pathname: "/search",
+            props: {
+              searchLocation: `${searchQuery === "" ? "Nearby" : searchQuery}`,
+              numberOfGuests: adultNumber + childernNumber + infantNumber,
+              sdate: document.querySelectorAll("#date-picker")[0].value,
+              edate: document.querySelectorAll("#date-picker")[1].value,
+              pets: petNumber,
+              results: results,
+            },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    else {
+      axios
+        .post("http://localhost:3001/auth/google/account/search/", data)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
 
   return (
     <div className="header">
@@ -177,24 +211,8 @@ function Header(props) {
               <p>Guests</p>
               <span className="add-guest-span">Add guests</span>
             </div>
-            <div className="search-icon">
-              <Link
-                to={{
-                  pathname: "/search",
-                  props: {
-                    searchLocation: `${
-                      searchQuery === "" ? "Nearby" : searchQuery
-                    }`,
-                    numberOfGuests: adultNumber + childernNumber + infantNumber,
-                    pets: petNumber,
-                    // sdate: `${sdate}`.substring(4, 15),
-                    // edate: document.querySelectorAll("#date-picker")[1].value,
-                  },
-                }}
-                className="search-icon-svg"
-              >
-                <SearchIcon></SearchIcon>
-              </Link>
+            <div className="search-icon" onClick={handleSearch}>
+              <SearchIcon onClick={handleSearch}></SearchIcon>
             </div>
           </div>
         </form>

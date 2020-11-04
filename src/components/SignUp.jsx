@@ -17,14 +17,14 @@ function SignUp(props) {
         <div
           className="signup-button"
           onClick={() => {
-            // axios
-            //   .get("http://localhost:5000/auth/google/user/")
-            //   .then((response) => {
-            //     console.log(response);
-            //   })
-            //   .catch((error) => {
-            //     console.log(error);
-            //   });
+            axios
+              .get("http://localhost:3001/auth/google/user/")
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
             setLoggedIn(true);
           }}
         >
