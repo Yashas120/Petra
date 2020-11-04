@@ -1,9 +1,10 @@
 import React from "react";
 import "./styles/searchPage.css";
 import SearchResult from "./SearchResult";
-import ScrollBar from "react-smooth-scrollbar";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 function SearchPage(props) {
+  const position = [12.971599, 77.594566];
   return (
     <div className="Wrapper">
       <div className="searchPage">
@@ -117,7 +118,19 @@ function SearchPage(props) {
           />
         </div>
       </div>
-      <div className="Map-component">Map Component</div>
+      <div className="Map-component">
+        <MapContainer center={position} zoom={11} scrollWheelZoom={false}>
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={position}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </MapContainer>
+      </div>
     </div>
   );
 }

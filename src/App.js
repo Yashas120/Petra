@@ -5,10 +5,8 @@ import Footer from "./components/Footer";
 import SearchPage from "./components/SearchPage";
 import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Scrollbar from "smooth-scrollbar";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollBar from "react-smooth-scrollbar";
-import { useEffect } from "react";
 
 function App() {
   return (
