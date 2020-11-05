@@ -68,7 +68,18 @@ function Header(props) {
       axios
         .post("http://localhost:3001/auth/google/account/search/", data)
         .then((response) => {
-          console.log(response.data);
+          const results = response.data.results;
+          history.push({
+            pathname: "/auth/google/account/search",
+            props: {
+              searchLocation: `${searchQuery === "" ? "Nearby" : searchQuery}`,
+              numberOfGuests: adultNumber + childernNumber + infantNumber,
+              sdate: document.querySelectorAll("#date-picker")[0].value,
+              edate: document.querySelectorAll("#date-picker")[1].value,
+              pets: petNumber,
+              results: results,
+            },
+          });
         })
         .catch((error) => {
           console.log(error);

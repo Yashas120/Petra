@@ -1,10 +1,42 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./styles/SignUp.css";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
+import GoogleLogin from "react-google-login";
 
 function SignUp(props) {
-  const [LoggedIn, setLoggedIn] = useState(false);
+  const history = useHistory();
+  const responseSuccess = (response) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:3001/auth/google/account/",
+      data: { tokenId: response.tokenId, googleId: response.googleId },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          history.push({
+            pathname: "/auth/google/account",
+            props: {
+              name: response.name,
+              emailID: response.email,
+              perks: response.perks,
+              imageUrl: response.imageUrl,
+              LoggedIn: true,
+            },
+          });
+        } else {
+          history.push("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const responseFailure = (response) => {
+    alert("Something Went Wrong during Authentication!");
+    history.push("/");
+  };
 
   return (
     <div className="signup-page">
@@ -14,24 +46,15 @@ function SignUp(props) {
       </div>
       <div className="right-container">
         <p>Please sign {props.type} using the following option.</p>
-        <div
-          className="signup-button"
-          onClick={() => {
-            axios
-              .get("http://localhost:3001/auth/google/user/")
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-            setLoggedIn(true);
-          }}
-        >
-          <img className="google-btn" src="./google.svg" alt="google"></img>
-          <p>Sign {props.type} with Google</p>
-          {LoggedIn ? <Redirect to="/auth/google/account"></Redirect> : null}
-        </div>
+        <br />
+        <br />
+        <GoogleLogin
+          clientId="1065157938718-eudu1eo9ic1l7dduroe3n85ffdthk9fp.apps.googleusercontent.com"
+          buttonText={`Sign ${props.type} with Google`}
+          onSuccess={responseSuccess}
+          onFailure={responseFailure}
+          cookiePolicy={"single_host_origin"}
+        ></GoogleLogin>
       </div>
     </div>
   );

@@ -34,11 +34,31 @@ function App() {
             <Home></Home>
             <Footer></Footer>
           </Route>
-          <Route exact path="/auth/google/account">
+          <Route
+            exact
+            path="/auth/google/account"
+            // render={(props) => {
+            //   <div>
+            //     <Header LoggedIn={props.LoggedIn}></Header>
+            //     <Home></Home>
+            //     <Footer></Footer>
+            //   </div>;
+            // }}
+          >
             <Header LoggedIn={true}></Header>
             <Home></Home>
             <Footer></Footer>
           </Route>
+          <Route
+            exact
+            path="/auth/google/account/search"
+            render={(props) => (
+              <div>
+                <SearchPage {...props}></SearchPage>
+                <Footer></Footer>
+              </div>
+            )}
+          ></Route>
           <Route
             exact
             path="/account"
