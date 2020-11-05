@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./styles/Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import LanguageIcon from "@material-ui/icons/Language";
@@ -11,8 +11,6 @@ import Hamburger from "@material-ui/icons/MenuRounded";
 import DatePicker from "./DatePicker";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-
-import { data } from "jquery";
 
 function Header(props) {
   const [showDiv, setShowDiv] = useState(false);
@@ -29,8 +27,7 @@ function Header(props) {
     "Delhi, India",
     "Chennai, India",
   ]);
-  // const [sdate, setSDate] = useState(new Date());
-  // const [edate, setEDate] = useState(new Date());
+  const [tempSearchValue, setTempSearchValue] = useState([]);
   const [showProfileDiv, setShowProfileDiv] = useState(false);
   const [showLangDiv, setShowLangDiv] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(props.LoggedIn);
@@ -179,6 +176,16 @@ function Header(props) {
                   if (document.querySelector(".location-input").value !== "")
                     setShowSearchSuggestions(true);
                   else setShowSearchSuggestions(false);
+                  let temp = searchValue.filter((suggestions) => {
+                    if (
+                      suggestions.indexOf(
+                        `${document.querySelector(".location-input").value}`
+                      ) > -1
+                    )
+                      return suggestions;
+                  });
+
+                  setTempSearchValue(temp);
                 }}
               ></input>
               {showSearchSuggestions ? (
@@ -218,7 +225,7 @@ function Header(props) {
         </form>
         {showSearchSuggestions ? (
           <div className="search-suggestions">
-            {searchValue.map((suggestions, index) => {
+            {tempSearchValue.map((suggestions, index) => {
               return (
                 <div
                   className="suggestion-items"
