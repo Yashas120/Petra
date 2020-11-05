@@ -183,6 +183,7 @@ function Header(props) {
                       ) > -1
                     )
                       return suggestions;
+                    return null;
                   });
 
                   setTempSearchValue(temp);
@@ -223,7 +224,7 @@ function Header(props) {
             </div>
           </div>
         </form>
-        {showSearchSuggestions ? (
+        {showSearchSuggestions && tempSearchValue.length > 0 ? (
           <div className="search-suggestions">
             {tempSearchValue.map((suggestions, index) => {
               return (
