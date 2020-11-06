@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles/Home.css";
 import Card from "./Card";
+import { withRouter } from "react-router-dom";
 
 function Home() {
   return (
@@ -46,4 +47,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default withRouter(Home);

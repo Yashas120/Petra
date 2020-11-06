@@ -10,7 +10,7 @@ import Clear from "@material-ui/icons/ClearRounded";
 import Hamburger from "@material-ui/icons/MenuRounded";
 import DatePicker from "./DatePicker";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
 
 function Header(props) {
   const [showDiv, setShowDiv] = useState(false);
@@ -124,7 +124,14 @@ function Header(props) {
             }}
           >
             <Hamburger className="menu-icon"></Hamburger>
-            <Avatar className="profile-photo"></Avatar>
+            {isLoggedIn ? (
+              <Avatar
+                className="profile-photo"
+                src={props.location.props.imageUrl}
+              ></Avatar>
+            ) : (
+              <Avatar className="profile-photo"></Avatar>
+            )}
           </div>
           {showProfileDiv && !isLoggedIn ? (
             <div className="profile-div">
@@ -145,9 +152,11 @@ function Header(props) {
               <p>
                 <Link
                   to={{
-                    pathname: "/account",
+                    pathname: "/profile",
                     props: {
-                      Name: "Vishal R",
+                      name: "Vishal R",
+                      imageUrl: props.location.props.imageUrl,
+                      perks: props.location.props.perks,
                     },
                   }}
                 >
@@ -406,4 +415,4 @@ function Header(props) {
   );
 }
 
-export default Header;
+export default withRouter(Header);

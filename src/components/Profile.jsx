@@ -11,14 +11,26 @@ function Profile(props) {
       <div className="side-bar">
         <h1>PeTra</h1>
         <img
-          src="/mountain.png"
-          alt="mountain"
+          src={props.location.props.imageUrl}
+          alt="profile"
           className="profile-picture"
         ></img>
-        <h3>{props.location.props.Name}</h3>
+        <h3>{props.location.props.name}</h3>
         <div className="side-bar-items">
+          <p>Perks : {props.location.props.perks}</p>
           <p>
-            <Link to="/auth/google/account" className="back-btn">
+            <Link
+              to={{
+                pathname: "/auth/google/account",
+                props: {
+                  name: props.location.props.name,
+                  imageUrl: props.location.props.imageUrl,
+                  perks: props.location.props.perks,
+                  LoggedIn: true,
+                },
+              }}
+              className="back-btn"
+            >
               Back
             </Link>
           </p>

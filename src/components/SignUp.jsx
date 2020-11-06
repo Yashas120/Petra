@@ -1,26 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import "./styles/SignUp.css";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 
 function SignUp(props) {
   const history = useHistory();
   const responseSuccess = (response) => {
+    console.log(response);
     axios({
       method: "POST",
       url: "http://localhost:3001/auth/google/account/",
-      data: { tokenId: response.tokenId, googleId: response.googleId },
+      data: {
+        tokenId: response.tokenId,
+        googleId: response.googleId,
+        imageUrl: response.profileObj.imageUrl,
+      },
     })
       .then((response) => {
+        console.log(response);
         if (response.status === 200) {
           history.push({
             pathname: "/auth/google/account",
             props: {
-              name: response.name,
-              emailID: response.email,
-              perks: response.perks,
-              imageUrl: response.imageUrl,
+              name: response.data.user.name,
+              emailID: response.data.user.email,
+              perks: response.data.user.perks,
+              imageUrl: response.data.user.imageUrl,
               LoggedIn: true,
             },
           });
@@ -60,4 +66,4 @@ function SignUp(props) {
   );
 }
 
-export default SignUp;
+export default withRouter(SignUp);

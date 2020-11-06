@@ -2,6 +2,7 @@ import React from "react";
 import "./styles/searchPage.css";
 import SearchResult from "./SearchResult";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { withRouter } from "react-router-dom";
 
 function SearchPage(props) {
   const position = [12.971599, 77.594566];
@@ -63,4 +64,4 @@ function SearchPage(props) {
   );
 }
 
-export default SearchPage;
+export default withRouter(SearchPage);
