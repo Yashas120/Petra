@@ -58,6 +58,7 @@ function Header(props) {
               edate: document.querySelectorAll("#date-picker")[1].value,
               pets: petNumber,
               results: results,
+              LoggedIn: isLoggedIn,
             },
           });
         })
@@ -78,6 +79,9 @@ function Header(props) {
               edate: document.querySelectorAll("#date-picker")[1].value,
               pets: petNumber,
               results: results,
+              LoggedIn: isLoggedIn,
+              name: props.location.props.name,
+              email: props.location.props.emailId,
             },
           });
         })
@@ -154,7 +158,7 @@ function Header(props) {
                   to={{
                     pathname: "/profile",
                     props: {
-                      name: "Vishal R",
+                      name: props.location.props.name,
                       imageUrl: props.location.props.imageUrl,
                       perks: props.location.props.perks,
                     },
@@ -240,7 +244,7 @@ function Header(props) {
               <span className="add-guest-span">Add guests</span>
             </div>
             <div className="search-icon" onClick={handleSearch}>
-              <SearchIcon onClick={handleSearch}></SearchIcon>
+              <SearchIcon></SearchIcon>
             </div>
           </div>
         </form>

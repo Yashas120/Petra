@@ -47,7 +47,10 @@ function SearchPage(props) {
           {props.location.props.results.map((result) => {
             return (
               <Marker
-                position={result.coordinates}
+                position={[
+                  result.coordinates.latitude,
+                  result.coordinates.longitude,
+                ]}
                 key={result.hotelID}
                 id={result.hotelID}
               >
