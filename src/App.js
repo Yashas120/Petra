@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import SearchPage from "./components/SearchPage";
 import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
+import Hotel from "./components/Product";
 import {
   BrowserRouter as Router,
   Switch,
@@ -69,6 +70,9 @@ function App() {
           </Route>
           <Route exact path="/login">
             <SignUp type="in"></SignUp>
+          </Route>
+          <Route exact path="/hotel">
+            <Hotel id="123"></Hotel>
           </Route>
         </Switch>
       </Router>
