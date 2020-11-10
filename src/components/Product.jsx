@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/Product.css";
 import SimpleImageSlider from "react-simple-image-slider";
 import KingBedTwoToneIcon from "@material-ui/icons/KingBedTwoTone";
@@ -24,126 +24,160 @@ import SubIcon from "@material-ui/icons/Remove";
 import Clear from "@material-ui/icons/ClearRounded";
 import Hamburger from "@material-ui/icons/MenuRounded";
 import Checkbox from "@material-ui/core/Checkbox";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
 
-function Hotel({ id }) {
-  id = {
-    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"],
-    title: "JW Marriot",
-    ratings: "4.5",
-    ratings_no: "8",
-    location: "Bangalore, Karnataka, India",
-    sub_title: "Sub-Title",
-    guests: "no of Guests per room",
-    beds: [true, false],
-    bedrooms: [true],
-    bathrooms: [true],
-    description_short: "short description",
-    the_space: "about space",
-    guest_access: "details",
-    guest_access_points: ["1", "2", "3"],
-    other: "other things to note",
+function Hotel(props) {
+  const [id, setID] = useState({
+    hotelID: 1,
+    images: [
+      {
+        url:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
+      },
+      {
+        url:
+          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+      },
+      {
+        url:
+          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+      },
+      {
+        url:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
+      },
+      {
+        url:
+          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+      },
+    ],
+    title: "",
+    ratings: "",
+    ratings_no: "",
+    location: "",
+    sub_title: "",
+    guests: "",
+    beds: [false, false],
+    bedrooms: [false],
+    bathrooms: [false],
+    description_short: "",
+    the_space: "",
+    guest_access: "",
+    guest_access_points: [""],
+    other: "",
     amenities: {
-      lift: true,
+      lift: false,
       ac: false,
-      wifi: true,
-      parking: true,
-      laptop: true,
-      disabled: true,
+      wifi: false,
+      parking: false,
+      laptop: false,
+      disabled: false,
       tv: false,
       infant: false,
     },
-    amenities_basic: ["Wifi", "Tv", "Ac", "laptop"],
-    amenities_facilities: ["Hot water", "lift", "free parking"],
-    amenities_dining: ["microwave", "refrigerator"],
-    amenities_bb: ["Hair dryer", "hanger", "shampoo", "Bed linen"],
-    amenities_safety: ["fireextinguisher"],
-    amenities_notincluded: ["smoke alarms"],
-    rating_cleanliness: "4.5",
-    rating_communication: "4.5",
-    rating_checkin: "4.0",
-    rating_accuracy: "4.2",
-    rating_Loaction: "3.9",
-    rating_value: "5",
+    amenities_basic: [""],
+    amenities_facilities: [""],
+    amenities_dining: [""],
+    amenities_bb: [""],
+    amenities_safety: [""],
+    amenities_notincluded: [""],
+    rating_cleanliness: "",
+    rating_communication: "",
+    rating_accuracy: "",
+    rating_Loaction: "",
+    rating_value: "",
     reviews: [
       {
-        name: "name 1",
-        dated: "october 2020",
-        review: "hello iam here. I am there .iam everywhere",
-      },
-      {
-        name: "name 2",
-        dated: "october 2020",
-        review:
-          "hello iam here. I am there .iam everywhere.hello iam here. I am there .iam everywhere",
-      },
-      {
-        name: "name 3",
-        dated: "october 2020",
-        review:
-          "hello iam here. I am there .iam everywherehello iam here. I am there .iam everywherehello iam here. I am there .iam everywhere",
-      },
-      {
-        name: "name 4",
-        dated: "october 2020",
-        review:
-          "hello iam here. I am there .iam everywherehello iam here. I am there .iam everywherehello iam here. I am there .iam everywherehello iam here. I am there .iam everywherehello iam here. I am there .iam everywherehello iam here. I am there .iam everywhere",
-      },
-      {
-        name: "name 5",
-        dated: "october 2020",
-        review:
-          "hello iam here. I am there .iam everywherehello iam here. I am there .iam everywhere",
-      },
-      {
-        name: "name 6",
-        dated: "october 2020",
-        review:
-          "hello iam here. I am there .iam everywherehello iam here. I am there .iam everywhere",
-      },
-      {
-        name: "name 7",
-        dated: "october 2020",
-        review:
-          "hello iam here. I am there .iam everywherehello iam here. I am there .iam everywhere",
-      },
-      {
-        name: "name 8",
-        dated: "october 2020",
-        review:
-          "hello iam here. I am there .iam everywherehello iam here. I am there .iam everywhere",
+        name: "",
+        dated: "",
+        review: "",
       },
     ],
-    sitter_name: "name",
-    sitter_description: "description of sitter",
-    sitter_mail: "helllo@gmail.com",
-    sitter_phone: "1234567890",
-    sitter_care: "4.5",
-    sitter_value: "4",
-    sitter_knowledge: "4.3",
-    sitter_images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"],
-    spa_name: "name",
-    spa_images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"],
-    sap_services: [
-      "description of spa",
-      "description of spa",
-      "description of spa",
+    sitter_name: "",
+    sitter_description: "",
+    sitter_mail: "",
+    sitter_phone: "",
+    sitter_care: "",
+    sitter_value: "",
+    sitter_knowledge: "",
+    sitter_images: [
+      {
+        url:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
+      },
+      {
+        url:
+          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+      },
+      {
+        url:
+          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+      },
+      {
+        url:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
+      },
+      {
+        url:
+          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+      },
     ],
-    spa_mail: "helllo@gmail.com",
-    spa_phone: "1234567890",
-    spa_care: "4.5",
-    spa_value: "4",
-    spa_quality: "4.3",
-    map_description_short: "short description",
-    map_description_getting_around:
-      "Its a 2 minute walk to the Metro Station.Half a minute walk to the Main Road, where auto-rickshaws will be in abundance.OLA/Uber and other cabs services available 24/7.Within a 2 Kms radius, there are multiple bus stops.If you need to park your 2 or 4 wheeler, we provide ample parking space in our basement.Hosmat Hospital is a 5 minute walk from the guest house.",
-    ppn: "2000",
-    service_fee: "353",
-    taxes: "243",
-    spa_cost: "200",
-    sitter_cost: "50",
-    host_phone: "1234567890",
-    host_mail: "qwertyui",
-  };
+    spa_name: "",
+    spa_images: [
+      {
+        url:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
+      },
+      {
+        url:
+          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+      },
+      {
+        url:
+          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+      },
+      {
+        url:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
+      },
+      {
+        url:
+          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+      },
+    ],
+    sap_services: [""],
+    spa_mail: "",
+    spa_phone: "",
+    spa_care: "",
+    spa_value: "",
+    spa_quality: "",
+    map_description_short: "",
+    map_description_getting_around: "",
+    ppn: "",
+    service_fee: "",
+    taxes: "",
+    spa_cost: "",
+    sitter_cost: "",
+    host_phone: "",
+    host_mail: "",
+  });
+
+  useEffect(() => {
+    let url;
+    if (props.location.props.LoggedIn)
+      url = `http://localhost:3001/auth/google/account/hotel/${props.location.props.hotelID}`;
+    else url = `http://localhost:3001/hotel/${props.location.props.hotelID}`;
+    axios
+      .get(url)
+      .then((response) => {
+        setID(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const [showMore, setShowMore] = useState(true);
   const [showMoremap, setShowMoremap] = useState(true);
   const [showAmenities, setShowAmenities] = useState(false);
@@ -161,15 +195,15 @@ function Hotel({ id }) {
   const [select_spa, setselect_spa] = useState(false);
   const [select_sitter, setselect_sitter] = useState(false);
 
-  function Ratingbar(props) {
+  function Ratingbar(props1) {
     return (
       <Box display="flex" alignItems="center">
         <Box width="100%" mr={1}>
-          <LinearProgress variant="determinate" value={props.value * 20} />
+          <LinearProgress variant="determinate" value={props1.value * 20} />
         </Box>
         <Box minWidth={35}>
           <Typography variant="body2" color="textSecondary">
-            {props.value}
+            {props1.value}
           </Typography>
         </Box>
       </Box>
@@ -182,6 +216,7 @@ function Hotel({ id }) {
         className={
           !showAmenities ? "hotel-wrapper-enabled" : "hotel-wrapper-disabled"
         }
+        key={1}
       >
         <div className="leftpane">
           <div className="title">
@@ -190,14 +225,14 @@ function Hotel({ id }) {
             <div id="rating-star">
               <StarIcon />{" "}
             </div>
-            <text id="ratings">
+            <p id="ratings">
               {id.ratings} ({id.ratings_no})
-            </text>
+            </p>
           </div>
           <div className="picture">
             <SimpleImageSlider
-              width={796}
-              height={504}
+              width={696}
+              height={304}
               className="picture-slider"
               images={id.images}
             />
@@ -206,11 +241,11 @@ function Hotel({ id }) {
             <p>
               <strong>{id.sub_title}</strong>
               <br></br>
-              {id.guests} {id.guests > 1 ? "Guests" : "Guest"} .{" "}
+              {id.guests} {id.guests > 1 ? "Guests" : "Guest"} ·
               {id.bedrooms.length}{" "}
-              {id.bedrooms.length > 1 ? "Bedrooms" : "Bedroom"} .{" "}
-              {id.beds.length} {id.beds.length > 1 ? "Beds" : "Bed"} .{" "}
-              {id.bathrooms.length} .{" "}
+              {id.bedrooms.length > 1 ? "Bedrooms" : "Bedroom"} ·{" "}
+              {id.beds.length} {id.beds.length > 1 ? "Beds" : "Bed"} ·{" "}
+              {id.bathrooms.length} ·{" "}
               {id.bathrooms.length > 1
                 ? "Private Bathrooms"
                 : "Private Bathroom"}
@@ -281,7 +316,7 @@ function Hotel({ id }) {
             <h3>Amenities</h3>
 
             <div className="amenities-wrapper">
-              <div classname="amenities-left">
+              <div className="amenities-left">
                 <div className="amenities-wrapper">
                   <div
                     className={
@@ -481,8 +516,8 @@ function Hotel({ id }) {
 
               <div className="picture">
                 <SimpleImageSlider
-                  width={796}
-                  height={404}
+                  width={696}
+                  height={304}
                   images={id.sitter_images}
                 />
               </div>
@@ -516,8 +551,8 @@ function Hotel({ id }) {
 
               <div className="picture">
                 <SimpleImageSlider
-                  width={796}
-                  height={404}
+                  width={696}
+                  height={304}
                   images={id.spa_images}
                 />
               </div>
@@ -639,7 +674,7 @@ function Hotel({ id }) {
               </div>
             </div>
 
-            <div classname="review-panel">
+            <div className="review-panel">
               <h4> Reviews </h4>
               {id.reviews.map((review, index) => {
                 if (index < no_of_reviews) {
@@ -657,6 +692,7 @@ function Hotel({ id }) {
                     </div>
                   );
                 }
+                return null;
               })}
               <br />
             </div>
@@ -856,7 +892,7 @@ function Hotel({ id }) {
             <div
               className="reserve"
               onClick={() => {
-                if (isLoggedIn && adultNumber != 0) {
+                if (isLoggedIn && adultNumber !== 0) {
                   //Do something
                 }
               }}
@@ -981,7 +1017,6 @@ function Hotel({ id }) {
           <p>{id.sitter_phone}</p>
         </div>
       </Modal>
-
       <Modal
         visible={showspacontact}
         width="400"
@@ -1004,7 +1039,6 @@ function Hotel({ id }) {
           <p>{id.spa_phone}</p>
         </div>
       </Modal>
-
       <Modal
         visible={showhostcontact}
         width="400"
@@ -1031,4 +1065,4 @@ function Hotel({ id }) {
   );
 }
 
-export default Hotel;
+export default withRouter(Hotel);

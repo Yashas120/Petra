@@ -20,7 +20,7 @@
 }
 
 .leftpane {
-  width: 69%;
+  width: 100%;
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
@@ -365,7 +365,7 @@
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
-  width: 100%;
+  width: 50%;
   height: max-content;
   background-color: white;
 }
@@ -393,6 +393,7 @@
   width: fit-content;
   border-radius: 10px;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .dates {
@@ -570,6 +571,7 @@
   width: 100%;
   border-radius: 10px;
   background-color: darkblue;
+  cursor: pointer;
 }
 
 .reserve-message {

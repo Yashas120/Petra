@@ -6,19 +6,38 @@ import SearchPage from "./components/SearchPage";
 import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
 import Hotel from "./components/Product";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  withRouter,
-} from "react-router-dom";
-import ScrollBar from "react-smooth-scrollbar";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
+          <Route
+            exact
+            path="/hotel/:id"
+            render={(props) => {
+              return (
+                <div>
+                  <Hotel {...props}></Hotel>
+                  <Footer></Footer>
+                </div>
+              );
+            }}
+          ></Route>
+          <Route
+            exact
+            path="/auth/google/account/hotel/:id"
+            render={(props) => {
+              return (
+                <div>
+                  <Hotel {...props}></Hotel>
+                  <Footer></Footer>
+                </div>
+              );
+            }}
+          ></Route>
+
           <Route exact path="/">
             <Header LoggedIn={false}></Header>
             <Home></Home>
@@ -70,9 +89,6 @@ function App() {
           </Route>
           <Route exact path="/login">
             <SignUp type="in"></SignUp>
-          </Route>
-          <Route exact path="/hotel">
-            <Hotel id="123"></Hotel>
           </Route>
         </Switch>
       </Router>

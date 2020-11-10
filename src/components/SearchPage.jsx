@@ -2,10 +2,11 @@ import React from "react";
 import "./styles/searchPage.css";
 import SearchResult from "./SearchResult";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 
 function SearchPage(props) {
   const position = [12.971599, 77.594566];
+  const history = useHistory();
 
   return (
     <div className="Wrapper">
@@ -23,17 +24,41 @@ function SearchPage(props) {
         <div className="search-results">
           {props.location.props.results.map((result) => {
             return (
-              <SearchResult
+              <div
                 key={result.hotelID}
-                img={result.img}
-                location={result.location}
-                title={result.title}
-                description={result.description}
-                star={result.star}
-                price={result.price}
-                total={result.total}
-                className="hotels"
-              ></SearchResult>
+                onClick={() => {
+                  if (props.location.props.LoggedIn)
+                    history.push({
+                      pathname: "/auth/google/account/hotel/" + result.hotelID,
+                      props: {
+                        LoggedIn: props.location.props.LoggedIn,
+                        hotelID: result.hotelID,
+                      },
+                    });
+                  else {
+                    history.push({
+                      pathname: "/hotel/" + result.hotelID,
+                      props: {
+                        LoggedIn: props.location.props.LoggedIn,
+                        hotelID: result.hotelID,
+                      },
+                    });
+                  }
+                }}
+              >
+                <SearchResult
+                  key={result.hotelID}
+                  id={result.hotelID}
+                  img={result.img}
+                  location={result.location}
+                  title={result.title}
+                  description={result.description}
+                  star={result.star}
+                  price={result.price}
+                  total={result.total}
+                  className="hotels"
+                ></SearchResult>
+              </div>
             );
           })}
         </div>
