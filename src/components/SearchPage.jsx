@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./styles/searchPage.css";
 import SearchResult from "./SearchResult";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { withRouter, useHistory } from "react-router-dom";
 
 function SearchPage(props) {
-  const position = [12.971599, 77.594566];
+  const [position, setPosition] = useState([13.0474878, 80.0689252]);
   const history = useHistory();
-
+  // 12.971599, 77.594566
+  useEffect(() => {
+    if (props.location.props.searchLocation.indexOf("Chennai") !== -1)
+      setPosition([13.0474878, 80.0689252]);
+    else setPosition([12.971599, 77.594566]);
+  }, []);
   return (
     <div className="Wrapper">
       <div className="searchPage">
