@@ -26,30 +26,15 @@ import Hamburger from "@material-ui/icons/MenuRounded";
 import Checkbox from "@material-ui/core/Checkbox";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Hotel(props) {
   const [id, setID] = useState({
     hotelID: 1,
     images: [
       {
-        url:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-      },
-      {
-        url:
-          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
-      },
-      {
-        url:
-          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
-      },
-      {
-        url:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-      },
-      {
-        url:
-          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+        url: "",
       },
     ],
     title: "",
@@ -103,47 +88,13 @@ function Hotel(props) {
     sitter_knowledge: "",
     sitter_images: [
       {
-        url:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-      },
-      {
-        url:
-          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
-      },
-      {
-        url:
-          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
-      },
-      {
-        url:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-      },
-      {
-        url:
-          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+        url: "",
       },
     ],
     spa_name: "",
     spa_images: [
       {
-        url:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-      },
-      {
-        url:
-          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
-      },
-      {
-        url:
-          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
-      },
-      {
-        url:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-      },
-      {
-        url:
-          "https://www.expatkings.com/wp-content/uploads/2018/10/Airbnb-rental-tips.-Hostmaker-1-620x349.jpg",
+        url: "",
       },
     ],
     sap_services: [""],
@@ -187,11 +138,15 @@ function Hotel(props) {
   const [showhostcontact, setshowhostcontact] = useState(false);
   const [showspa, setshowspa] = useState(false);
   const [showguests, setshowguests] = useState(false);
-  const [adultNumber, setAdultNumber] = useState(0);
-  const [childernNumber, setChildernNumber] = useState(0);
-  const [infantNumber, setInfantNumber] = useState(0);
-  const [petNumber, setPetNumber] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [adultNumber, setAdultNumber] = useState(props.location.props.adults);
+  const [childernNumber, setChildernNumber] = useState(
+    props.location.props.childern
+  );
+  const [infantNumber, setInfantNumber] = useState(
+    props.location.props.infants
+  );
+  const [petNumber, setPetNumber] = useState(props.location.props.pets);
+  const [isLoggedIn, setIsLoggedIn] = useState(props.location.props.LoggedIn);
   const [select_spa, setselect_spa] = useState(false);
   const [select_sitter, setselect_sitter] = useState(false);
 
@@ -230,12 +185,25 @@ function Hotel(props) {
             </p>
           </div>
           <div className="picture">
-            <SimpleImageSlider
-              width={696}
-              height={304}
-              className="picture-slider"
-              images={id.images}
-            />
+            <Carousel
+              stopOnHover
+              dynamicHeight
+              infiniteLoop
+              showStatus={false}
+              useKeyboardArrows
+              swipeable
+              interval={3500}
+              transitionTime={500}
+              className="slider"
+            >
+              {id.images.map((image, index) => {
+                return (
+                  <div key={index}>
+                    <img src={image.url} alt="home"></img>
+                  </div>
+                );
+              })}
+            </Carousel>
           </div>
           <div className="subtitle">
             <p>
@@ -515,11 +483,25 @@ function Hotel(props) {
               <h4>{id.sitter_name}</h4>
 
               <div className="picture">
-                <SimpleImageSlider
-                  width={696}
-                  height={304}
-                  images={id.sitter_images}
-                />
+                <Carousel
+                  stopOnHover
+                  dynamicHeight
+                  infiniteLoop
+                  showStatus={false}
+                  useKeyboardArrows
+                  swipeable
+                  interval={3500}
+                  transitionTime={500}
+                  className="slider"
+                >
+                  {id.sitter_images.map((image, index) => {
+                    return (
+                      <div key={index}>
+                        <img src={image.url} alt="home"></img>
+                      </div>
+                    );
+                  })}
+                </Carousel>
               </div>
               <div
                 className="contact-sitter"
@@ -550,11 +532,25 @@ function Hotel(props) {
               <h4>{id.spa_name}</h4>
 
               <div className="picture">
-                <SimpleImageSlider
-                  width={696}
-                  height={304}
-                  images={id.spa_images}
-                />
+                <Carousel
+                  stopOnHover
+                  dynamicHeight
+                  infiniteLoop
+                  showStatus={false}
+                  useKeyboardArrows
+                  swipeable
+                  interval={3500}
+                  transitionTime={500}
+                  className="slider"
+                >
+                  {id.spa_images.map((image, index) => {
+                    return (
+                      <div key={index}>
+                        <img src={image.url} alt="home"></img>
+                      </div>
+                    );
+                  })}
+                </Carousel>
               </div>
               <div className="spa-servives">
                 {id.sap_services.map((point, index) => {

@@ -33,6 +33,10 @@ function SearchPage(props) {
                       props: {
                         LoggedIn: props.location.props.LoggedIn,
                         hotelID: result.hotelID,
+                        adults: props.location.props.adults,
+                        childern: props.location.props.childern,
+                        infants: props.location.props.infants,
+                        pets: props.location.props.pets,
                       },
                     });
                   else {
@@ -41,6 +45,10 @@ function SearchPage(props) {
                       props: {
                         LoggedIn: props.location.props.LoggedIn,
                         hotelID: result.hotelID,
+                        adults: props.location.props.adults,
+                        childern: props.location.props.childern,
+                        infants: props.location.props.infants,
+                        pets: props.location.props.pets,
                       },
                     });
                   }
