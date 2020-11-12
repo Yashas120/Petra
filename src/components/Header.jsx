@@ -21,11 +21,9 @@ function Header(props) {
   const [petNumber, setPetNumber] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchValue, setSearchValue] = useState([
-    "Banaglore, India",
-    "Mysore, India",
-    "Mumbai, India",
-    "Delhi, India",
+    "Bangalore, India",
     "Chennai, India",
+    "Mumbai, India",
   ]);
   const [tempSearchValue, setTempSearchValue] = useState([]);
   const [showProfileDiv, setShowProfileDiv] = useState(false);
@@ -208,15 +206,35 @@ function Header(props) {
                   else setShowSearchSuggestions(false);
                   let temp = searchValue.filter((suggestions) => {
                     if (
-                      suggestions.indexOf(
-                        `${document.querySelector(".location-input").value}`
-                      ) > -1
+                      suggestions
+                        .toLowerCase()
+                        .indexOf(
+                          `${document
+                            .querySelector(".location-input")
+                            .value.toLowerCase()}`
+                        ) > -1
                     )
                       return suggestions;
                     return null;
                   });
-
-                  setTempSearchValue(temp);
+                  if (
+                    document
+                      .querySelector(".location-input")
+                      .value.toLowerCase()
+                      .indexOf("b") < 0 &&
+                    document
+                      .querySelector(".location-input")
+                      .value.toLowerCase()
+                      .indexOf("c") < 0 &&
+                    document
+                      .querySelector(".location-input")
+                      .value.toLowerCase()
+                      .indexOf("m")
+                  )
+                    setTempSearchValue([
+                      "We are still expanding our offerings!",
+                    ]);
+                  else setTempSearchValue(temp);
                 }}
               ></input>
               {showSearchSuggestions ? (
@@ -263,11 +281,18 @@ function Header(props) {
                   id={index}
                   key={index}
                   onClick={() => {
-                    document.querySelector(
-                      ".location-input"
-                    ).value = suggestions;
-                    setSearchQuery(suggestions);
-                    setShowSearchSuggestions(false);
+                    if (
+                      suggestions !== "We are still expanding our offerings!"
+                    ) {
+                      document.querySelector(
+                        ".location-input"
+                      ).value = suggestions;
+                      setSearchQuery(suggestions);
+                      setShowSearchSuggestions(false);
+                    } else {
+                      document.querySelector(".suggestion-items").style.cursor =
+                        "default";
+                    }
                   }}
                 >
                   {suggestions}

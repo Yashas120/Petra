@@ -73,10 +73,17 @@
   padding: 2%;
   transition: 5s linear ease-in;
   scroll-behavior: smooth;
+  border-radius: 20px;
 }
 
 .slider {
   max-width: 819px;
+}
+
+.slider-picture {
+  height: inherit;
+  width: inherit;
+  resize: both;
 }
 
 .subtitle {
@@ -619,4 +626,13 @@
 
 .popup > p {
   margin-bottom: 20px;
+}
+
+.loading-div {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 24% 0%;
+  text-align: center;
+  background-color: white;
 }

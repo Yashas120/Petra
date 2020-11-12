@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./styles/searchPage.css";
 import SearchResult from "./SearchResult";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { withRouter, useHistory } from "react-router-dom";
 
 function SearchPage(props) {
-  const [position, setPosition] = useState([13.0474878, 80.0689252]);
   const history = useHistory();
   // 12.971599, 77.594566
-  useEffect(() => {
-    if (props.location.props.searchLocation.indexOf("Chennai") !== -1)
-      setPosition([13.0474878, 80.0689252]);
-    else setPosition([12.971599, 77.594566]);
-  }, []);
+  let position;
+  if (props.location.props.searchLocation === "Chennai, India")
+    position = [13.0474878, 80.1689252];
+  else if (props.location.props.searchLocation === "Bangalore, India")
+    position = [12.971599, 77.594566];
   return (
     <div className="Wrapper">
       <div className="searchPage">
@@ -77,7 +76,7 @@ function SearchPage(props) {
         </div>
       </div>
       <div className="Map-component">
-        <MapContainer center={position} zoom={11} scrollWheelZoom={false}>
+        <MapContainer center={position} zoom={10} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
