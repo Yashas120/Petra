@@ -49,10 +49,7 @@ function App() {
             render={(props) => {
               return (
                 <div>
-                  <Header
-                    LoggedIn={props.location.props.LoggedIn}
-                    {...props}
-                  ></Header>
+                  <Header {...props}></Header>
                   <Home></Home>
                   <Footer></Footer>
                 </div>
@@ -61,7 +58,7 @@ function App() {
           ></Route>
           <Route
             exact
-            path="/auth/google/account/searchPage"
+            path="/auth/google/account/search"
             render={(props) => (
               <div>
                 <SearchPage {...props}></SearchPage>

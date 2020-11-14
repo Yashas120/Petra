@@ -21,21 +21,59 @@ import AddIcon from "@material-ui/icons/Add";
 import SubIcon from "@material-ui/icons/Remove";
 import Checkbox from "@material-ui/core/Checkbox";
 import axios from "axios";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Hotel(props) {
+  const history = useHistory();
+  if ("hotel" in sessionStorage) {
+  } else history.push("/");
   const [id, setID] = useState({});
-
   const [dataReceived, setDataReceived] = useState(false);
+  const [showMore, setShowMore] = useState(true);
+  const [showMoremap, setShowMoremap] = useState(true);
+  const [showAmenities, setShowAmenities] = useState(false);
+  const [no_of_reviews, setno_of_reviews] = useState(3);
+  const [showsittercontact, setshowsittercontact] = useState(false);
+  const [showspacontact, setshowspacontact] = useState(false);
+  const [showhostcontact, setshowhostcontact] = useState(false);
+  const [showspa, setshowspa] = useState(false);
+  const [showguests, setshowguests] = useState(false);
+  const [adultNumber, setAdultNumber] = useState(
+    JSON.parse(sessionStorage.getItem("hotel")).props.adults
+  );
+  const [childernNumber, setChildernNumber] = useState(
+    JSON.parse(sessionStorage.getItem("hotel")).props.childern
+  );
+  const [infantNumber, setInfantNumber] = useState(
+    JSON.parse(sessionStorage.getItem("hotel")).props.infants
+  );
+  const [petNumber, setPetNumber] = useState(
+    JSON.parse(sessionStorage.getItem("hotel")).props.pets
+  );
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    JSON.parse(sessionStorage.getItem("hotel")).props.LoggedIn
+  );
+  const [select_spa, setselect_spa] = useState(false);
+  const [select_sitter, setselect_sitter] = useState(false);
+
+  // if ("hotel" in sessionStorage) {
+  //   let temp = JSON.parse(sessionStorage.getItem("hotel"));
+  //   setIsLoggedIn(temp.props.LoggedIn);
+  //   // setAdultNumber(temp.props.adults);
+  //   // setChildernNumber(temp.props.childern);
+  //   // setInfantNumber(temp.props.infants);
+  //   // setPetNumber(temp.props.pets);
+  // }
 
   useEffect(() => {
     async function getData() {
       let url;
-      if (props.location.props.LoggedIn)
-        url = `http://localhost:3001/auth/google/account/hotel/${props.location.props.hotelID}`;
-      else url = `http://localhost:3001/hotel/${props.location.props.hotelID}`;
+      let temp = JSON.parse(sessionStorage.getItem("hotel"));
+      if (temp.props.LoggedIn)
+        url = `http://localhost:3001/auth/google/account/hotel/${temp.props.hotelID}`;
+      else url = `http://localhost:3001/hotel/${temp.props.hotelID}`;
       await axios
         .get(url)
         .then((response) => {
@@ -47,32 +85,7 @@ function Hotel(props) {
         });
     }
     getData();
-  }, [
-    dataReceived,
-    props.location.props.hotelID,
-    props.location.props.LoggedIn,
-  ]);
-
-  const [showMore, setShowMore] = useState(true);
-  const [showMoremap, setShowMoremap] = useState(true);
-  const [showAmenities, setShowAmenities] = useState(false);
-  const [no_of_reviews, setno_of_reviews] = useState(3);
-  const [showsittercontact, setshowsittercontact] = useState(false);
-  const [showspacontact, setshowspacontact] = useState(false);
-  const [showhostcontact, setshowhostcontact] = useState(false);
-  const [showspa, setshowspa] = useState(false);
-  const [showguests, setshowguests] = useState(false);
-  const [adultNumber, setAdultNumber] = useState(props.location.props.adults);
-  const [childernNumber, setChildernNumber] = useState(
-    props.location.props.childern
-  );
-  const [infantNumber, setInfantNumber] = useState(
-    props.location.props.infants
-  );
-  const [petNumber, setPetNumber] = useState(props.location.props.pets);
-  const [isLoggedIn, setIsLoggedIn] = useState(props.location.props.LoggedIn);
-  const [select_spa, setselect_spa] = useState(false);
-  const [select_sitter, setselect_sitter] = useState(false);
+  }, [dataReceived]);
 
   function Ratingbar(props1) {
     return (
@@ -131,6 +144,7 @@ function Hotel(props) {
                           src={image.url}
                           alt="home"
                           className="slider-picture"
+                          key={index}
                         ></img>
                       </div>
                     );
@@ -431,7 +445,7 @@ function Hotel(props) {
                       {id.sitter_images.map((image, index) => {
                         return (
                           <div key={index}>
-                            <img src={image.url} alt="home"></img>
+                            <img src={image.url} key={index} alt="home"></img>
                           </div>
                         );
                       })}
@@ -484,7 +498,7 @@ function Hotel(props) {
                       {id.spa_images.map((image, index) => {
                         return (
                           <div key={index}>
-                            <img src={image.url} alt="home"></img>
+                            <img src={image.url} key={index} alt="home"></img>
                           </div>
                         );
                       })}
@@ -674,11 +688,27 @@ function Hotel(props) {
                   <div className="dates">
                     <div className="hotel-Check-in">
                       <p>Check In</p>
-                      <DatePicker date={new Date()}></DatePicker>
+                      <DatePicker
+                        date={
+                          new Date(
+                            JSON.parse(
+                              sessionStorage.getItem("hotel")
+                            ).props.sdate
+                          )
+                        }
+                      ></DatePicker>
                     </div>
                     <div className="hotel-Check-out">
                       <p>Check Out</p>
-                      <DatePicker date={new Date()}></DatePicker>
+                      <DatePicker
+                        date={
+                          new Date(
+                            JSON.parse(
+                              sessionStorage.getItem("hotel")
+                            ).props.edate
+                          )
+                        }
+                      ></DatePicker>
                     </div>
                   </div>
                   <div

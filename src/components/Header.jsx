@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import LanguageIcon from "@material-ui/icons/Language";
@@ -28,8 +28,19 @@ function Header(props) {
   const [tempSearchValue, setTempSearchValue] = useState([]);
   const [showProfileDiv, setShowProfileDiv] = useState(false);
   const [showLangDiv, setShowLangDiv] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(props.LoggedIn);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const history = useHistory();
+
+  useEffect(() => {
+    if ("profile" in sessionStorage) {
+      setIsLoggedIn(
+        JSON.parse(sessionStorage.getItem("profile")).props.LoggedIn
+      );
+    } else {
+      history.push("/");
+    }
+  }, [isLoggedIn]);
+
   function handleSearch() {
     const data = {
       Query: searchQuery,
@@ -105,7 +116,7 @@ function Header(props) {
           sessionStorage.setItem(
             "searchPageProps",
             JSON.stringify({
-              pathname: "/search",
+              pathname: "/auth/google/account/search",
               props: {
                 searchLocation: `${
                   searchQuery === "" ? "Nearby" : searchQuery
@@ -124,7 +135,7 @@ function Header(props) {
             })
           );
           history.push({
-            pathname: "/search",
+            pathname: "/auth/google/account/search",
             props: {
               searchLocation: `${searchQuery === "" ? "Nearby" : searchQuery}`,
               numberOfGuests: adultNumber + childernNumber + infantNumber,
@@ -186,7 +197,9 @@ function Header(props) {
             {isLoggedIn ? (
               <Avatar
                 className="profile-photo"
-                src={props.location.props.imageUrl}
+                src={
+                  JSON.parse(sessionStorage.getItem("profile")).props.imageUrl
+                }
               ></Avatar>
             ) : (
               <Avatar className="profile-photo"></Avatar>
@@ -213,9 +226,12 @@ function Header(props) {
                   to={{
                     pathname: "/profile",
                     props: {
-                      name: props.location.props.name,
-                      imageUrl: props.location.props.imageUrl,
-                      perks: props.location.props.perks,
+                      name: JSON.parse(sessionStorage.getItem("profile")).props
+                        .name,
+                      imageUrl: JSON.parse(sessionStorage.getItem("profile"))
+                        .props.imageUrl,
+                      perks: JSON.parse(sessionStorage.getItem("profile")).props
+                        .perks,
                     },
                   }}
                 >
@@ -226,6 +242,9 @@ function Header(props) {
                 <Link
                   to="/"
                   onClick={() => {
+                    sessionStorage.removeItem("profile");
+                    sessionStorage.removeItem("searchPageProps");
+                    sessionStorage.removeItem("hotel");
                     setIsLoggedIn(false);
                     setShowProfileDiv(false);
                   }}

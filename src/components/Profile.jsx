@@ -35,7 +35,15 @@ function Profile(props) {
             </Link>
           </p>
           <p>
-            <Link to="/" className="sign-out-btn">
+            <Link
+              to="/"
+              className="sign-out-btn"
+              onClick={() => {
+                sessionStorage.removeItem("profile");
+                sessionStorage.removeItem("searchPageProps");
+                sessionStorage.removeItem("hotel");
+              }}
+            >
               Sign Out
             </Link>
           </p>

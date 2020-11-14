@@ -20,6 +20,19 @@ function SignUp(props) {
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
+          sessionStorage.setItem(
+            "profile",
+            JSON.stringify({
+              pathname: "/auth/google/account",
+              props: {
+                name: response.data.user.name,
+                emailID: response.data.user.email,
+                perks: response.data.user.perks,
+                imageUrl: response.data.user.imageUrl,
+                LoggedIn: true,
+              },
+            })
+          );
           history.push({
             pathname: "/auth/google/account",
             props: {

@@ -11,11 +11,11 @@ function SearchPage(props) {
 
   useEffect(() => {
     async function loadData() {
-      let temp = await JSON.parse(sessionStorage.getItem("props"));
+      let temp = await JSON.parse(sessionStorage.getItem("searchPageProps"));
       setPropContents(temp);
       await setTimeout(async () => {
         console.log(propContents);
-        if ("props" in sessionStorage) {
+        if ("searchPageProps" in sessionStorage) {
           setLoading(true);
         } else {
           console.log("Redirecting");
@@ -46,7 +46,24 @@ function SearchPage(props) {
                   <div
                     key={result.hotelID}
                     onClick={() => {
-                      if (propContents.props.LoggedIn)
+                      if (propContents.props.LoggedIn) {
+                        sessionStorage.setItem(
+                          "hotel",
+                          JSON.stringify({
+                            pathname:
+                              "/auth/google/account/hotel/" + result.hotelID,
+                            props: {
+                              LoggedIn: propContents.props.LoggedIn,
+                              hotelID: result.hotelID,
+                              adults: propContents.props.adults,
+                              childern: propContents.props.childern,
+                              infants: propContents.props.infants,
+                              pets: propContents.props.pets,
+                              sdate: propContents.props.sdate,
+                              edate: propContents.props.edate,
+                            },
+                          })
+                        );
                         history.push({
                           pathname:
                             "/auth/google/account/hotel/" + result.hotelID,
@@ -59,7 +76,24 @@ function SearchPage(props) {
                             pets: propContents.props.pets,
                           },
                         });
-                      else {
+                      } else {
+                        sessionStorage.setItem(
+                          "hotel",
+                          JSON.stringify({
+                            pathname:
+                              "/auth/google/account/hotel/" + result.hotelID,
+                            props: {
+                              LoggedIn: propContents.props.LoggedIn,
+                              hotelID: result.hotelID,
+                              adults: propContents.props.adults,
+                              childern: propContents.props.childern,
+                              infants: propContents.props.infants,
+                              pets: propContents.props.pets,
+                              sdate: propContents.props.sdate,
+                              edate: propContents.props.edate,
+                            },
+                          })
+                        );
                         history.push({
                           pathname: "/hotel/" + result.hotelID,
                           props: {
