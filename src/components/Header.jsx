@@ -42,11 +42,37 @@ function Header(props) {
       Pets: petNumber,
       LoggedIn: isLoggedIn,
     };
+
     if (!isLoggedIn)
       axios
         .post("http://localhost:3001/search/", data)
         .then((response) => {
           const results = response.data.results;
+          let pos = [];
+          if (searchQuery === "Chennai, India") pos = [13.0474878, 80.1689252];
+          else if (searchQuery === "Bangalore, India")
+            pos = [12.971599, 77.594566];
+          sessionStorage.setItem(
+            "searchPageProps",
+            JSON.stringify({
+              pathname: "/search",
+              props: {
+                searchLocation: `${
+                  searchQuery === "" ? "Nearby" : searchQuery
+                }`,
+                numberOfGuests: adultNumber + childernNumber + infantNumber,
+                sdate: document.querySelectorAll("#date-picker")[0].value,
+                edate: document.querySelectorAll("#date-picker")[1].value,
+                adults: adultNumber,
+                infants: infantNumber,
+                childern: childernNumber,
+                pets: petNumber,
+                results: results,
+                LoggedIn: isLoggedIn,
+                coordinates: pos,
+              },
+            })
+          );
           history.push({
             pathname: "/search",
             props: {
@@ -60,6 +86,7 @@ function Header(props) {
               pets: petNumber,
               results: results,
               LoggedIn: isLoggedIn,
+              coordinates: pos,
             },
           });
         })
@@ -71,8 +98,33 @@ function Header(props) {
         .post("http://localhost:3001/auth/google/account/search/", data)
         .then((response) => {
           const results = response.data.results;
+          let pos = [];
+          if (searchQuery === "Chennai, India") pos = [13.0474878, 80.1689252];
+          else if (searchQuery === "Bangalore, India")
+            pos = [12.971599, 77.594566];
+          sessionStorage.setItem(
+            "searchPageProps",
+            JSON.stringify({
+              pathname: "/search",
+              props: {
+                searchLocation: `${
+                  searchQuery === "" ? "Nearby" : searchQuery
+                }`,
+                numberOfGuests: adultNumber + childernNumber + infantNumber,
+                sdate: document.querySelectorAll("#date-picker")[0].value,
+                edate: document.querySelectorAll("#date-picker")[1].value,
+                adults: adultNumber,
+                infants: infantNumber,
+                childern: childernNumber,
+                pets: petNumber,
+                results: results,
+                LoggedIn: isLoggedIn,
+                coordinates: pos,
+              },
+            })
+          );
           history.push({
-            pathname: "/auth/google/account/search",
+            pathname: "/search",
             props: {
               searchLocation: `${searchQuery === "" ? "Nearby" : searchQuery}`,
               numberOfGuests: adultNumber + childernNumber + infantNumber,
@@ -84,8 +136,7 @@ function Header(props) {
               pets: petNumber,
               results: results,
               LoggedIn: isLoggedIn,
-              name: props.location.props.name,
-              email: props.location.props.emailId,
+              coordinates: pos,
             },
           });
         })
