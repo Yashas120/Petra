@@ -15,11 +15,31 @@ import { Link, useHistory, withRouter } from "react-router-dom";
 function Header(props) {
   const [showDiv, setShowDiv] = useState(false);
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
-  const [adultNumber, setAdultNumber] = useState(0);
-  const [childernNumber, setChildernNumber] = useState(0);
-  const [infantNumber, setInfantNumber] = useState(0);
-  const [petNumber, setPetNumber] = useState(0);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [adultNumber, setAdultNumber] = useState(
+    "searchPageProps" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("searchPageProps")).props.adults
+      : 0
+  );
+  const [childernNumber, setChildernNumber] = useState(
+    "searchPageProps" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("searchPageProps")).props.childern
+      : 0
+  );
+  const [infantNumber, setInfantNumber] = useState(
+    "searchPageProps" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("searchPageProps")).props.infants
+      : 0
+  );
+  const [petNumber, setPetNumber] = useState(
+    "searchPageProps" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("searchPageProps")).props.pets
+      : 0
+  );
+  const [searchQuery, setSearchQuery] = useState(
+    "searchPageProps" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("searchPageProps")).props.Query
+      : ""
+  );
   const [searchValue, setSearchValue] = useState([
     "Bangalore, India",
     "Chennai, India",
@@ -36,9 +56,11 @@ function Header(props) {
       setIsLoggedIn(
         JSON.parse(sessionStorage.getItem("profile")).props.LoggedIn
       );
+      history.push("/auth/google/account");
     } else {
       history.push("/");
     }
+    if ("hotel" in sessionStorage) sessionStorage.removeItem("hotel");
   }, [isLoggedIn]);
 
   function handleSearch() {
@@ -318,11 +340,31 @@ function Header(props) {
             </div>
             <div className="Check-in">
               <p>Check In</p>
-              <DatePicker date={new Date()}></DatePicker>
+              <DatePicker
+                date={`${
+                  "searchPageProps" in sessionStorage
+                    ? new Date(
+                        JSON.parse(
+                          sessionStorage.getItem("searchPageProps")
+                        ).props.sdate
+                      )
+                    : new Date()
+                }`}
+              ></DatePicker>
             </div>
             <div className="Check-out">
               <p>Check Out</p>
-              <DatePicker date={new Date()}></DatePicker>
+              <DatePicker
+                date={`${
+                  "searchPageProps" in sessionStorage
+                    ? new Date(
+                        JSON.parse(
+                          sessionStorage.getItem("searchPageProps")
+                        ).props.edate
+                      )
+                    : new Date()
+                }`}
+              ></DatePicker>
             </div>
             <div
               className="Guest-count"

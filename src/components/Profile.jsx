@@ -1,31 +1,48 @@
 import React, { useState } from "react";
 import "./styles/Profile.css";
 import SearchResult from "./SearchResult";
-import { Link } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
 
 function Profile(props) {
   const [currentBookings, setCurrentBookings] = useState(true);
   const [previousBookings, setPreviousBookings] = useState(false);
+  const history = useHistory();
+  if (!("profile" in sessionStorage)) {
+    history.push("/");
+  }
+
   return (
     <div className="profile-page">
       <div className="side-bar">
-        <h1>PeTra</h1>
+        <div
+          className="petra-logo-profile"
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          PeTra
+        </div>
         <img
-          src={props.location.props.imageUrl}
+          src={JSON.parse(sessionStorage.getItem("profile")).props.imageUrl}
           alt="profile"
           className="profile-picture"
         ></img>
-        <h3>{props.location.props.name}</h3>
+        <h3>{JSON.parse(sessionStorage.getItem("profile")).props.name}</h3>
         <div className="side-bar-items">
-          <p>Perks : {props.location.props.perks}</p>
+          <p>
+            Perks : {JSON.parse(sessionStorage.getItem("profile")).props.perks}
+          </p>
           <p>
             <Link
               to={{
                 pathname: "/auth/google/account",
                 props: {
-                  name: props.location.props.name,
-                  imageUrl: props.location.props.imageUrl,
-                  perks: props.location.props.perks,
+                  name: JSON.parse(sessionStorage.getItem("profile")).props
+                    .name,
+                  imageUrl: JSON.parse(sessionStorage.getItem("profile")).props
+                    .imageUrl,
+                  perks: JSON.parse(sessionStorage.getItem("profile")).props
+                    .perks,
                   LoggedIn: true,
                 },
               }}
@@ -166,4 +183,4 @@ function Profile(props) {
   );
 }
 
-export default Profile;
+export default withRouter(Profile);

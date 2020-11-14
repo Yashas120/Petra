@@ -21,14 +21,23 @@ import AddIcon from "@material-ui/icons/Add";
 import SubIcon from "@material-ui/icons/Remove";
 import Checkbox from "@material-ui/core/Checkbox";
 import axios from "axios";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter, useHistory, useLocation, Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Hotel(props) {
   const history = useHistory();
+  const location = useLocation();
   if ("hotel" in sessionStorage) {
+    if (
+      !location.pathname.endsWith(
+        JSON.parse(sessionStorage.getItem("hotel")).props.hotelID
+      )
+    ) {
+      history.push("/");
+    }
   } else history.push("/");
+
   const [id, setID] = useState({});
   const [dataReceived, setDataReceived] = useState(false);
   const [showMore, setShowMore] = useState(true);
@@ -41,19 +50,29 @@ function Hotel(props) {
   const [showspa, setshowspa] = useState(false);
   const [showguests, setshowguests] = useState(false);
   const [adultNumber, setAdultNumber] = useState(
-    JSON.parse(sessionStorage.getItem("hotel")).props.adults
+    "hotel" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("hotel")).props.adults
+      : 0
   );
   const [childernNumber, setChildernNumber] = useState(
-    JSON.parse(sessionStorage.getItem("hotel")).props.childern
+    "hotel" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("hotel")).props.childern
+      : 0
   );
   const [infantNumber, setInfantNumber] = useState(
-    JSON.parse(sessionStorage.getItem("hotel")).props.infants
+    "hotel" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("hotel")).props.infants
+      : 0
   );
   const [petNumber, setPetNumber] = useState(
-    JSON.parse(sessionStorage.getItem("hotel")).props.pets
+    "hotel" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("hotel")).props.pets
+      : 0
   );
   const [isLoggedIn, setIsLoggedIn] = useState(
-    JSON.parse(sessionStorage.getItem("hotel")).props.LoggedIn
+    "hotel" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("hotel")).props.LoggedIn
+      : 0
   );
   const [select_spa, setselect_spa] = useState(false);
   const [select_sitter, setselect_sitter] = useState(false);
@@ -84,7 +103,7 @@ function Hotel(props) {
           console.log(error);
         });
     }
-    getData();
+    if ("hotel" in sessionStorage) getData();
   }, [dataReceived]);
 
   function Ratingbar(props1) {
@@ -106,6 +125,7 @@ function Hotel(props) {
     <div>
       {dataReceived ? (
         <div>
+          {}
           <div
             className={
               !showAmenities
@@ -115,6 +135,14 @@ function Hotel(props) {
             key={1}
           >
             <div className="leftpane">
+              <div
+                className="petra-logo"
+                onClick={() => {
+                  history.push("/");
+                }}
+              >
+                PeTra
+              </div>
               <div className="title">
                 <h1>{id.title}</h1>
                 <div className="hotel-location">{id.location}</div>
@@ -860,8 +888,25 @@ function Hotel(props) {
                 <div
                   className="reserve"
                   onClick={() => {
-                    if (isLoggedIn && adultNumber !== 0) {
-                      //Do something
+                    if (!isLoggedIn && adultNumber === 0) {
+                      setshowguests(true);
+                    } else if (isLoggedIn && adultNumber === 0) {
+                      setshowguests(true);
+                    } else if (isLoggedIn && adultNumber !== 0) {
+                    } else if (!isLoggedIn) {
+                      let temp = JSON.parse(sessionStorage.getItem("hotel"));
+                      temp.props.sdate = document.querySelectorAll(
+                        "#date-picker"
+                      )[0].value;
+                      temp.props.edate = document.querySelectorAll(
+                        "#date-picker"
+                      )[1].value;
+                      temp.props.adults = adultNumber;
+                      temp.props.infants = infantNumber;
+                      temp.props.childern = childernNumber;
+                      temp.props.pets = petNumber;
+                      sessionStorage.setItem("hotel", JSON.stringify(temp));
+                      history.push("/login");
                     }
                   }}
                 >

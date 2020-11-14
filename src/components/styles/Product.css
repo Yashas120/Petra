@@ -636,3 +636,13 @@
   text-align: center;
   background-color: white;
 }
+
+.petra-logo {
+  width: 100%;
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 3% 5%;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -30,6 +30,14 @@ function SearchPage(props) {
       {loading ? (
         <div className="Wrapper">
           <div className="searchPage">
+            <div
+              className="petra-logo"
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              PeTra
+            </div>
             <div className="searchPage__info">
               <p>
                 {propContents.props.results.length} stays in{" "}

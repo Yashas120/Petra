@@ -20,9 +20,33 @@ function SignUp(props) {
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
-          sessionStorage.setItem(
-            "profile",
-            JSON.stringify({
+          if (
+            "searchPageProps" in sessionStorage &&
+            "hotel" in sessionStorage &&
+            !("profile" in sessionStorage)
+          ) {
+            let temp1 = JSON.parse(sessionStorage.getItem("searchPageProps"));
+            let temp2 = JSON.parse(sessionStorage.getItem("hotel"));
+            temp1.props.LoggedIn = true;
+            temp2.props.LoggedIn = true;
+            sessionStorage.setItem("searchPageProps", JSON.stringify(temp1));
+            sessionStorage.setItem("hotel", JSON.stringify(temp2));
+            history.push(temp2.pathname);
+          } else {
+            sessionStorage.setItem(
+              "profile",
+              JSON.stringify({
+                pathname: "/auth/google/account",
+                props: {
+                  name: response.data.user.name,
+                  emailID: response.data.user.email,
+                  perks: response.data.user.perks,
+                  imageUrl: response.data.user.imageUrl,
+                  LoggedIn: true,
+                },
+              })
+            );
+            history.push({
               pathname: "/auth/google/account",
               props: {
                 name: response.data.user.name,
@@ -31,18 +55,8 @@ function SignUp(props) {
                 imageUrl: response.data.user.imageUrl,
                 LoggedIn: true,
               },
-            })
-          );
-          history.push({
-            pathname: "/auth/google/account",
-            props: {
-              name: response.data.user.name,
-              emailID: response.data.user.email,
-              perks: response.data.user.perks,
-              imageUrl: response.data.user.imageUrl,
-              LoggedIn: true,
-            },
-          });
+            });
+          }
         } else {
           history.push("/");
         }
