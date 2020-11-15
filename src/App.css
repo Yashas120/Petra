@@ -2,3 +2,39 @@
   height: 100%;
   width: 100%;
 }
+
+@font-face {
+  font-family: PeTra-Font-Light;
+  src: url("./components/styles/fonts/AirbnbCerealLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PeTra-Font-Black;
+  src: url("./components/styles/fonts/AirbnbCerealBlack.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PeTra-Font-Bold;
+  src: url("./components/styles/fonts/AirbnbCerealBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PeTra-Font-Normal;
+  src: url("./components/styles/fonts/AirbnbCerealBook.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PeTra-Font-Medium;
+  src: url("./components/styles/fonts/AirbnbCerealMedium.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

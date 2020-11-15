@@ -24,11 +24,13 @@
   padding: 20px;
   padding-top: 20px;
   border: 1;
+  font-family: PeTra-Font-Normal;
 }
 
 .card__info > h2 {
   font-size: 18px;
   font-weight: 600;
+  font-family: PeTra-Font-Normal;
 }
 
 .card__info > h4 {
@@ -36,4 +38,5 @@
   font-weight: 300;
   margin-top: 8px;
   margin-bottom: 8px;
+  font-family: PeTra-Font-Normal;
 }
