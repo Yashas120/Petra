@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div className="footer">
       <p>&copy; 2020 PeTra. All Rights Reserved</p>
-      <p>Privacy Terms Sitemap About</p>
+      <p className="others">Privacy · Terms · Sitemap · About</p>
     </div>
   );
 }

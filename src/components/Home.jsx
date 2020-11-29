@@ -2,16 +2,43 @@ import React from "react";
 import "./styles/Home.css";
 import Card from "./Card";
 import { withRouter } from "react-router-dom";
+import Masonry from "react-masonry-component";
+import Gallery from "react-photo-gallery";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import TwitterIcon from "@material-ui/icons/Twitter";
 
 function Home() {
+  let images = [
+    {
+      src: "http://localhost:3001/Hotels/Bangalore/sitter/Hotel2-sitter2.jpg",
+      width: 2,
+      height: 2,
+    },
+    {
+      src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel1-spa4.jpg",
+      width: 1,
+      height: 1,
+    },
+    {
+      src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel1-spa1.jpg",
+      width: 1,
+      height: 1,
+    },
+    {
+      src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel4-spa3.jpg",
+      width: 1,
+      height: 1,
+    },
+    {
+      src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel1-spa5.jpg",
+      width: 1,
+      height: 1,
+    },
+  ];
   return (
     <div className="home">
       <div className="home__section">
-        <Card
-          src="https://a0.muscache.com/im/pictures/eb9c7c6a-ee33-414a-b1ba-14e8860d59b3.jpg?im_w=720"
-          title="Online Experiences"
-          description="Unique activities we can do together, led by a world of hosts."
-        />
         <Card
           src="https://a0.muscache.com/im/pictures/15159c9c-9cf1-400e-b809-4e13f286fa38.jpg?im_w=720"
           title="Unique stays"
@@ -25,23 +52,47 @@ function Home() {
       </div>
       <div className="home__section">
         <Card
-          src="https://media.nomadicmatt.com/2019/airbnb_breakup3.jpg"
-          title="3 Bedroom Flat in Bournemouth"
-          description="Superhost with a stunning view of the beachside in Sunny Bournemouth"
-          price="£130/night"
+          src="http://localhost:3001/Hotels/Chennai/images/Hotel5-1.jpg"
+          title="Taj Hotel"
+          description="Superhost with a lots of different amenities and a great place for shopping"
         />
         <Card
-          src="https://thespaces.com/wp-content/uploads/2017/08/Courtesy-of-Airbnb.jpg"
-          title="Penthouse in London"
-          description="Enjoy the amazing sights of London with this stunning penthouse"
-          price="£350/night"
+          src="http://localhost:3001/Hotels/Bangalore/images/Hotel5-1.jpg"
+          title="Four Seasons Hotel"
+          description="Enjoy the amazing sights of Bangalore with this stunning penthouse"
         />
         <Card
-          src="https://media.nomadicmatt.com/2018/apartment.jpg"
-          title="1 Bedroom apartment"
-          description="Superhost with great amenities and a fabolous shopping complex nearby"
-          price="£70/night"
+          src="http://localhost:3001/Hotels/Chennai/images/Hotel6-1.jpg"
+          title="Taj Fisherman"
+          description="Superhost with great amenities and a fabulous view of the beachside in Chennai"
         />
+      </div>
+      <div className="pets_section">
+        <div className="left-pane-pets">
+          <Gallery photos={images} className="images"></Gallery>
+        </div>
+        <div className="right-pane-pets">
+          <h1>Travelling with Pets?</h1>
+          <p>No Worries! </p> <br></br>
+          <p>
+            We have all the necessary arrangements to make your vacation even
+            more amazing!
+          </p>
+          <br></br>
+          <p>
+            Each stay comes with a sitter and a spa for your pet. We will take
+            good care of your pets while you are away enjoying the sunset on the
+            beach.
+          </p>
+        </div>
+      </div>
+      <div className="cta">
+        <h3>Reach Out to Us On</h3>
+        <div className="social-icons">
+          <InstagramIcon></InstagramIcon>
+          <FacebookIcon></FacebookIcon>
+          <TwitterIcon></TwitterIcon>
+        </div>
       </div>
     </div>
   );

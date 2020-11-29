@@ -1,4 +1,92 @@
 .home__section {
   display: flex;
-  padding: 30px;
+  padding: 50px;
+}
+.pets_section {
+  position: relative;
+  box-sizing: border-box;
+  padding: 5%;
+  width: 100%;
+  height: fit-content;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 50px; */
+  /* justify-content: space-around; */
+}
+.left-pane-pets {
+  position: relative;
+  height: max-content;
+  display: flex;
+  width: 70%;
+  /* height: fit-content; */
+  background-color: black;
+  box-sizing: border-box;
+}
+
+.gallery-pets {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  /* padding: 2%; */
+  height: max-content;
+  width: 100%;
+  background-color: white;
+  flex: 3;
+}
+.right-pane-pets {
+  color: white;
+  width: 30%;
+  /* height: fit-content; */
+  box-sizing: border-box;
+  padding: 2%;
+  background-color: black;
+  font-family: PeTra-Font-Normal;
+}
+
+.right-pane-pets > h1 {
+  margin-bottom: 30px;
+  font-size: 40px;
+}
+
+/* .pets_section :only-child {
+  border: none;
+}
+.pet-card {
+  border: none;
+} */
+
+.left-pane-pets > div > div > img {
+  border-radius: 10px;
+}
+
+.cta {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: max-content;
+  box-sizing: border-box;
+  padding: 5%;
+  font-family: PeTra-Font-Normal;
+}
+
+.cta > h3 {
+  font-size: 25px;
+}
+
+.social-icons {
+  display: flex;
+  margin: auto;
+  width: 100%;
+  height: max-content;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 3% 3% 0% 3%;
+}
+.social-icons > svg {
+  padding: 5px;
 }
