@@ -24,6 +24,7 @@ import axios from "axios";
 import { withRouter, useHistory, useLocation, Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 function Hotel(props) {
   const history = useHistory();
@@ -49,6 +50,16 @@ function Hotel(props) {
   const [showhostcontact, setshowhostcontact] = useState(false);
   const [showspa, setshowspa] = useState(false);
   const [showguests, setshowguests] = useState(false);
+  const [sdate, setsdate] = useState(
+    "hotel" in sessionStorage
+      ? new Date(JSON.parse(sessionStorage.getItem("hotel")).props.sdate)
+      : 0
+  );
+  const [edate, setedate] = useState(
+    "hotel" in sessionStorage
+      ? new Date(JSON.parse(sessionStorage.getItem("hotel")).props.edate)
+      : 0
+  );
   const [adultNumber, setAdultNumber] = useState(
     "hotel" in sessionStorage
       ? JSON.parse(sessionStorage.getItem("hotel")).props.adults
@@ -76,15 +87,6 @@ function Hotel(props) {
   );
   const [select_spa, setselect_spa] = useState(false);
   const [select_sitter, setselect_sitter] = useState(false);
-
-  // if ("hotel" in sessionStorage) {
-  //   let temp = JSON.parse(sessionStorage.getItem("hotel"));
-  //   setIsLoggedIn(temp.props.LoggedIn);
-  //   // setAdultNumber(temp.props.adults);
-  //   // setChildernNumber(temp.props.childern);
-  //   // setInfantNumber(temp.props.infants);
-  //   // setPetNumber(temp.props.pets);
-  // }
 
   useEffect(() => {
     async function getData() {
@@ -125,15 +127,7 @@ function Hotel(props) {
     <div>
       {dataReceived ? (
         <div>
-          {}
-          <div
-            className={
-              !showAmenities
-                ? "hotel-wrapper-enabled"
-                : "hotel-wrapper-disabled"
-            }
-            key={1}
-          >
+          <div className={"hotel-wrapper-enabled"} key={1}>
             <div className="leftpane">
               <div
                 className="petra-logo"
@@ -203,7 +197,7 @@ function Hotel(props) {
                 </div>
 
                 <div
-                  id="showmore"
+                  id="map-showmore"
                   onClick={() => {
                     if (!showMore) {
                       setShowMore(true);
@@ -212,7 +206,7 @@ function Hotel(props) {
                     }
                   }}
                 >
-                  {showMore ? "⬇ More" : "⬆ Less"}
+                  {showMore ? "⬇ More" : null}
                 </div>
 
                 <div className={showMore ? "showmore" : "showless"}>
@@ -233,6 +227,18 @@ function Hotel(props) {
                   <h5>Other thing to note</h5>
                   {id.other}
                   <br />
+                  <div
+                    id="map-showmore"
+                    onClick={() => {
+                      if (!showMore) {
+                        setShowMore(true);
+                      } else {
+                        setShowMore(false);
+                      }
+                    }}
+                  >
+                    {showMore ? null : "⬆ Less"}
+                  </div>
                 </div>
               </div>
 
@@ -255,189 +261,188 @@ function Hotel(props) {
               </div>
 
               <div className="amenities">
-                <h3>Amenities</h3>
+                <div>
+                  <h3>Amenities</h3>
 
-                <div className="amenities-wrapper">
-                  <div className="amenities-left">
-                    <div className="amenities-wrapper">
-                      <div
-                        className={
-                          id.amenities.Wifi === true
-                            ? "amenity-icon-enabled"
-                            : "amenity-icon-disabled"
-                        }
-                      >
-                        <WifiTwoToneIcon />
+                  <div className="amenities-wrapper">
+                    <div className="amenities-left">
+                      <div className="amenities-wrapper">
+                        <div
+                          className={
+                            id.amenities.Wifi === true
+                              ? "amenity-icon-enabled"
+                              : "amenity-icon-disabled"
+                          }
+                        >
+                          <WifiTwoToneIcon />
+                        </div>
+                        <div
+                          className={
+                            id.amenities.Wifi === true
+                              ? "amenity-type-enabled text"
+                              : "amenity-type-disabled text"
+                          }
+                        >
+                          Wifi
+                        </div>
                       </div>
-                      <div
-                        className={
-                          id.amenities.Wifi === true
-                            ? "amenity-type-enabled text"
-                            : "amenity-type-disabled text"
-                        }
-                      >
-                        Wifi
+                      <div className="amenities-wrapper">
+                        <div
+                          className={
+                            id.amenities.ac === true
+                              ? "amenity-icon-enabled"
+                              : "amenity-icon-disabled"
+                          }
+                        >
+                          <AcUnitRoundedIcon />
+                        </div>
+
+                        <div
+                          className={
+                            id.amenities.ac === true
+                              ? "amenity-type-enabled text"
+                              : "amenity-type-disabled text"
+                          }
+                        >
+                          Air conditioning
+                        </div>
+                      </div>
+
+                      <div className="amenities-wrapper">
+                        <div
+                          className={
+                            id.amenities.laptop === true
+                              ? "amenity-icon-enabled"
+                              : "amenity-icon-disabled"
+                          }
+                        >
+                          <LaptopWindowsRoundedIcon />
+                        </div>
+
+                        <div
+                          className={
+                            id.amenities.laptop === true
+                              ? "amenity-type-enabled text"
+                              : "amenity-type-disabled text"
+                          }
+                        >
+                          Laptop friendly
+                        </div>
+                      </div>
+
+                      <div className="amenities-wrapper">
+                        <div
+                          className={
+                            id.amenities.disabled === true
+                              ? "amenity-icon-enabled"
+                              : "amenity-icon-disabled"
+                          }
+                        >
+                          <AccessibleRoundedIcon />
+                        </div>
+
+                        <div
+                          className={
+                            id.amenities.disabled === true
+                              ? "amenity-type-enabled text"
+                              : "amenity-type-disabled text"
+                          }
+                        >
+                          Easy Access for the disabled
+                        </div>
                       </div>
                     </div>
-                    <div className="amenities-wrapper">
-                      <div
-                        className={
-                          id.amenities.ac === true
-                            ? "amenity-icon-enabled"
-                            : "amenity-icon-disabled"
-                        }
-                      >
-                        <AcUnitRoundedIcon />
+
+                    <div className="amenities-right">
+                      <div className="amenities-wrapper">
+                        <div
+                          className={
+                            id.amenities.lift === true
+                              ? "amenity-icon-enabled"
+                              : "amenity-icon-disabled"
+                          }
+                        >
+                          <ImportExportTwoToneIcon />
+                        </div>
+
+                        <div
+                          className={
+                            id.amenities.lift === true
+                              ? "amenity-type-enabled text"
+                              : "amenity-type-disabled text"
+                          }
+                        >
+                          Lift
+                        </div>
                       </div>
 
-                      <div
-                        className={
-                          id.amenities.ac === true
-                            ? "amenity-type-enabled text"
-                            : "amenity-type-disabled text"
-                        }
-                      >
-                        Air conditioning
-                      </div>
-                    </div>
+                      <div className="amenities-wrapper">
+                        <div
+                          className={
+                            id.amenities.parking === true
+                              ? "amenity-icon-enabled"
+                              : "amenity-icon-disabled"
+                          }
+                        >
+                          <LocalParkingRoundedIcon />
+                        </div>
 
-                    <div className="amenities-wrapper">
-                      <div
-                        className={
-                          id.amenities.laptop === true
-                            ? "amenity-icon-enabled"
-                            : "amenity-icon-disabled"
-                        }
-                      >
-                        <LaptopWindowsRoundedIcon />
-                      </div>
-
-                      <div
-                        className={
-                          id.amenities.laptop === true
-                            ? "amenity-type-enabled text"
-                            : "amenity-type-disabled text"
-                        }
-                      >
-                        Laptop friendly
-                      </div>
-                    </div>
-
-                    <div className="amenities-wrapper">
-                      <div
-                        className={
-                          id.amenities.disabled === true
-                            ? "amenity-icon-enabled"
-                            : "amenity-icon-disabled"
-                        }
-                      >
-                        <AccessibleRoundedIcon />
+                        <div
+                          className={
+                            id.amenities.parking === true
+                              ? "amenity-type-enabled text"
+                              : "amenity-type-disabled text"
+                          }
+                        >
+                          Free parking within the premises
+                        </div>
                       </div>
 
-                      <div
-                        className={
-                          id.amenities.disabled === true
-                            ? "amenity-type-enabled text"
-                            : "amenity-type-disabled text"
-                        }
-                      >
-                        Easy Access for the disabled
+                      <div className="amenities-wrapper">
+                        <div
+                          className={
+                            id.amenities.tv === true
+                              ? "amenity-icon-enabled"
+                              : "amenity-icon-disabled"
+                          }
+                        >
+                          <TvRoundedIcon />
+                        </div>
+
+                        <div
+                          className={
+                            id.amenities.tv === true
+                              ? "amenity-type-enabled text"
+                              : "amenity-type-disabled text"
+                          }
+                        >
+                          Cable TV
+                        </div>
+                      </div>
+
+                      <div className="amenities-wrapper">
+                        <div
+                          className={
+                            id.amenities.infant === true
+                              ? "amenity-icon-enabled"
+                              : "amenity-icon-disabled"
+                          }
+                        >
+                          <ChildFriendlyRoundedIcon />
+                        </div>
+
+                        <div
+                          className={
+                            id.amenities.infant === true
+                              ? "amenity-type-enabled text"
+                              : "amenity-type-disabled text"
+                          }
+                        >
+                          Infant Friendly
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <div className="amenities-right">
-                    <div className="amenities-wrapper">
-                      <div
-                        className={
-                          id.amenities.lift === true
-                            ? "amenity-icon-enabled"
-                            : "amenity-icon-disabled"
-                        }
-                      >
-                        <ImportExportTwoToneIcon />
-                      </div>
-
-                      <div
-                        className={
-                          id.amenities.lift === true
-                            ? "amenity-type-enabled text"
-                            : "amenity-type-disabled text"
-                        }
-                      >
-                        Lift
-                      </div>
-                    </div>
-
-                    <div className="amenities-wrapper">
-                      <div
-                        className={
-                          id.amenities.parking === true
-                            ? "amenity-icon-enabled"
-                            : "amenity-icon-disabled"
-                        }
-                      >
-                        <LocalParkingRoundedIcon />
-                      </div>
-
-                      <div
-                        className={
-                          id.amenities.parking === true
-                            ? "amenity-type-enabled text"
-                            : "amenity-type-disabled text"
-                        }
-                      >
-                        Free parking within the premises
-                      </div>
-                    </div>
-
-                    <div className="amenities-wrapper">
-                      <div
-                        className={
-                          id.amenities.tv === true
-                            ? "amenity-icon-enabled"
-                            : "amenity-icon-disabled"
-                        }
-                      >
-                        <TvRoundedIcon />
-                      </div>
-
-                      <div
-                        className={
-                          id.amenities.tv === true
-                            ? "amenity-type-enabled text"
-                            : "amenity-type-disabled text"
-                        }
-                      >
-                        Cable TV
-                      </div>
-                    </div>
-
-                    <div className="amenities-wrapper">
-                      <div
-                        className={
-                          id.amenities.infant === true
-                            ? "amenity-icon-enabled"
-                            : "amenity-icon-disabled"
-                        }
-                      >
-                        <ChildFriendlyRoundedIcon />
-                      </div>
-
-                      <div
-                        className={
-                          id.amenities.infant === true
-                            ? "amenity-type-enabled text"
-                            : "amenity-type-disabled text"
-                        }
-                      >
-                        Infant Friendly
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <strong>
                   <button
                     className="more-amenities"
                     onClick={() => {
@@ -446,7 +451,7 @@ function Hotel(props) {
                   >
                     Show all Amenities
                   </button>
-                </strong>
+                </div>
               </div>
 
               <div className="pet-arrangements">
@@ -579,7 +584,28 @@ function Hotel(props) {
 
               <div className="hotel-location-div">
                 <h3>Location</h3>
-                <div className="map"> </div>
+                <div className="Map-component-product">
+                  <MapContainer
+                    center={[id.latitude, id.longitude]}
+                    zoom={15}
+                    scrollWheelZoom={false}
+                  >
+                    <TileLayer
+                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker
+                      position={[id.latitude, id.longitude]}
+                      key={id.hotelID}
+                      id={id.hotelID}
+                    >
+                      <Popup>
+                        {id.name} <br></br>
+                        {id.price}
+                      </Popup>
+                    </Marker>
+                  </MapContainer>
+                </div>
                 <div className="map-description">
                   <div
                     className={!showMoremap ? "map-showmore" : "map-showless"}
@@ -597,7 +623,7 @@ function Hotel(props) {
                       }
                     }}
                   >
-                    {showMoremap ? "⬇ More" : "⬆ Less"}
+                    {showMoremap ? "⬇ More" : null}
                   </div>
 
                   <div
@@ -606,6 +632,19 @@ function Hotel(props) {
                     {id.map_description_short}
                     <h5> Getting Around </h5>
                     {id.map_description_getting_around}
+                    <br />
+                    <div
+                      id="map-showmore"
+                      onClick={() => {
+                        if (!showMoremap) {
+                          setShowMoremap(true);
+                        } else {
+                          setShowMoremap(false);
+                        }
+                      }}
+                    >
+                      {!showMoremap ? "⬆ Less" : null}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -688,8 +727,9 @@ function Hotel(props) {
                       setno_of_reviews(no_of_reviews + 5);
                     }
                   }}
+                  style={{ cursor: "pointer" }}
                 >
-                  more
+                  {no_of_reviews < id.ratings_no - 1 ? `More` : null}
                 </div>
               </div>
             </div>
@@ -714,7 +754,21 @@ function Hotel(props) {
 
                 <div className="hotel-check-in-out">
                   <div className="dates">
-                    <div className="hotel-Check-in">
+                    <div
+                      className="hotel-Check-in"
+                      onClick={() => {
+                        let temp = JSON.parse(sessionStorage.getItem("hotel"));
+                        temp.props.sdate = document.querySelectorAll(
+                          "#date-picker"
+                        )[0].value;
+                        sessionStorage.setItem("hotel", JSON.stringify(temp));
+                        setsdate(() => {
+                          return new Date(
+                            document.querySelectorAll("#date-picker")[0].value
+                          );
+                        });
+                      }}
+                    >
                       <p>Check In</p>
                       <DatePicker
                         date={
@@ -726,7 +780,21 @@ function Hotel(props) {
                         }
                       ></DatePicker>
                     </div>
-                    <div className="hotel-Check-out">
+                    <div
+                      className="hotel-Check-out"
+                      onClick={() => {
+                        let temp = JSON.parse(sessionStorage.getItem("hotel"));
+                        temp.props.edate = document.querySelectorAll(
+                          "#date-picker"
+                        )[1].value;
+                        sessionStorage.setItem("hotel", JSON.stringify(temp));
+                        setedate(() => {
+                          return new Date(
+                            document.querySelectorAll("#date-picker")[1].value
+                          );
+                        });
+                      }}
+                    >
                       <p>Check Out</p>
                       <DatePicker
                         date={
@@ -880,8 +948,8 @@ function Hotel(props) {
                 <div className="pet-options">
                   {petNumber ? (
                     <div>
-                      Spa {id.spa_cost}\hour: <Checkbox />
-                      Sitter {id.sitter_cost}\hour: <Checkbox />
+                      Spa {id.spa_cost}/hour: <Checkbox />
+                      Sitter {id.sitter_cost}/hour: <Checkbox />
                     </div>
                   ) : null}
                 </div>
@@ -917,12 +985,18 @@ function Hotel(props) {
                 </div>
                 <div className="cost">
                   <p>
-                    {Number(id.ppn)} * {0} Night : {Number(id.ppn) * 0}
+                    &#8377;{Number(id.ppn)} x{" "}
+                    {(edate.getTime() - sdate.getTime()) /
+                      (1000 * 60 * 60 * 24)}{" "}
+                    Nights : &#8377;
+                    {(Number(id.ppn) * (edate.getTime() - sdate.getTime())) /
+                      (1000 * 60 * 60 * 24)}
                   </p>
-                  <p>Service fee : {id.service_fee}</p>
-                  <p>Other Charges : {id.taxes}</p>
+                  <p>Service fee : &#8377;{id.service_fee}</p>
+                  <p>Other Charges : &#8377;{id.taxes}</p>
                   <p>
-                    Pet Charges (for 10 hours\day) : {Number(id.spa_cost) * 10}
+                    Pet Charges (for 10 hours/day) : &#8377;
+                    {Number(id.spa_cost) * 5}
                   </p>
                 </div>
                 <div
@@ -933,15 +1007,29 @@ function Hotel(props) {
                 >
                   <p>Contact Host</p>
                 </div>
+                <div className="total-price">
+                  <p className="totalamt">Total Amount</p>
+                  <p className="totalamount">
+                    &#8377;
+                    {(Number(id.ppn) * (edate.getTime() - sdate.getTime())) /
+                      (1000 * 60 * 60 * 24) +
+                      (id.service_fee * (edate.getTime() - sdate.getTime())) /
+                        (1000 * 60 * 60 * 24) +
+                      (id.taxes * (edate.getTime() - sdate.getTime())) /
+                        (1000 * 60 * 60 * 24)}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-          <div
-            className={
-              showAmenities ? "all-amenities-enabled" : "all-amenities-disabled"
-            }
+          <Modal
+            visible={showAmenities}
+            width="500"
+            height="500"
+            effect="fadeInUp"
+            onClickAway={() => setShowAmenities(false)}
           >
-            <div className="all-amenities">
+            <div className="popup" style={{ overflow: "scroll" }}>
               <div
                 className="close-amenities"
                 onClick={() => {
@@ -1008,7 +1096,7 @@ function Hotel(props) {
                 );
               })}
             </div>
-          </div>
+          </Modal>
           <Modal
             visible={showsittercontact}
             width="400"
