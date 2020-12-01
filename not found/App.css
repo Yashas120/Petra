@@ -1,0 +1,56 @@
+.App {
+  height: 100%;
+  width: 100%;
+}
+.landing{
+  opacity: 1;
+  transition: visibility 1s ease, opacity 0.5s ease ;  
+}
+ .homepage{
+  background-color: white;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+} 
+
+.landingfinish{
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+} 
+
+.homepage_ready{
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 2.5s ease, opacity 1s ease ;
+  pointer-events: initial;
+}
+
+
+@font-face {
+  font-family: PeTra-Font-Light;
+  src: url("./components/styles/fonts/AirbnbCerealLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PeTra-Font-Black;
+  src: url("./components/styles/fonts/AirbnbCerealBlack.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PeTra-Font-Bold;
+  src: url("./components/styles/fonts/AirbnbCerealBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PeTra-Font-Normal;
+  src: url("./components/styles/fonts/AirbnbCerealBook.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
