@@ -24,6 +24,8 @@ function DatePicker(props) {
             margin="normal"
             id="date-picker"
             format="MM/dd/yyyy"
+            minDate={props.minDate}
+            maxDate={props.maxDate}
             disablePast
             value={selectedDate}
             onChange={handleDateChange}

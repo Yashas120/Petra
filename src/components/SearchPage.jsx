@@ -48,6 +48,11 @@ function SearchPage(props) {
               </p>
               <h1>Stays nearby</h1>
             </div>
+            {/* <div className="filters">
+              <div>Price</div>
+              <div>Type</div>
+              <div>Ratings</div>
+            </div> */}
             <div className="search-results">
               {propContents.props.results.map((result) => {
                 return (

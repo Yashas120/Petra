@@ -45,6 +45,10 @@ function Header(props) {
     "Chennai, India",
     "Mumbai, India",
   ]);
+  const [sdate, setsdate] = useState(new Date());
+  const [edate, setedate] = useState(
+    new Date(new Date().getTime() + 1000 * 60 * 60 * 24)
+  );
   const [tempSearchValue, setTempSearchValue] = useState([]);
   const [showProfileDiv, setShowProfileDiv] = useState(false);
   const [showLangDiv, setShowLangDiv] = useState(false);
@@ -338,7 +342,16 @@ function Header(props) {
                 ></Clear>
               ) : null}
             </div>
-            <div className="Check-in">
+            <div
+              className="Check-in"
+              onClick={() => {
+                setsdate(() => {
+                  return new Date(
+                    document.querySelectorAll("#date-picker")[0].value
+                  );
+                });
+              }}
+            >
               <p>Check In</p>
               <DatePicker
                 date={`${
@@ -350,9 +363,19 @@ function Header(props) {
                       )
                     : new Date()
                 }`}
+                maxDate={new Date(edate.getTime() - 1000 * 60 * 60 * 24)}
               ></DatePicker>
             </div>
-            <div className="Check-out">
+            <div
+              className="Check-out"
+              onClick={() => {
+                setedate(() => {
+                  return new Date(
+                    document.querySelectorAll("#date-picker")[1].value
+                  );
+                });
+              }}
+            >
               <p>Check Out</p>
               <DatePicker
                 date={`${
@@ -362,8 +385,9 @@ function Header(props) {
                           sessionStorage.getItem("searchPageProps")
                         ).props.edate
                       )
-                    : new Date()
+                    : new Date(new Date().getTime() + 1000 * 60 * 60 * 24)
                 }`}
+                minDate={new Date(sdate.getTime() + 1000 * 60 * 60 * 24)}
               ></DatePicker>
             </div>
             <div
