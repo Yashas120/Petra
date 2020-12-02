@@ -28,8 +28,8 @@ function SearchResult({
             </p>
           </div>
           <div className="searchResults__price">
-            <h2>{price}</h2>
-            <p>{total}</p>
+            <h2>&#8377; {price}/Night</h2>
+            <p>&#8377; {total}/Night</p>
           </div>
         </div>
       </div>

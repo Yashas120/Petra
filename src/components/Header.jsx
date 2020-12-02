@@ -363,7 +363,7 @@ function Header(props) {
                       )
                     : new Date()
                 }`}
-                maxDate={new Date(edate.getTime() - 1000 * 60 * 60 * 24)}
+                // maxDate={new Date(edate.getTime() - 1000 * 60 * 60 * 24)}
               ></DatePicker>
             </div>
             <div

@@ -15,6 +15,73 @@
   scroll-behavior: smooth;
 }
 
+.filters {
+  width: 100%;
+  margin-bottom: 50px;
+  height: 100px;
+  box-sizing: border-box;
+  padding: 0% 5% 2%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  font-family: PeTra-Font-Normal;
+}
+.price-filter {
+  height: fit-content;
+  border-radius: 20px;
+  padding: 0.5% 2%;
+  border: 1px solid lightgray;
+  background-color: white;
+  width: fit-content;
+}
+
+.price-slider,
+.rating-slider {
+  padding: 50px;
+  width: 400px;
+  height: 80px;
+}
+
+.type-switches {
+  padding: 50px;
+  width: 400px;
+  height: 80px;
+}
+
+.type-filter {
+  height: fit-content;
+  border-radius: 20px;
+  padding: 0.5% 2%;
+  background-color: white;
+  border: 1px solid lightgray;
+  width: fit-content;
+}
+
+.rating-filter {
+  width: fit-content;
+  border-radius: 20px;
+  padding: 0.5% 2%;
+  height: fit-content;
+  border: 1px solid lightgray;
+  background-color: white;
+}
+
+.price-filter,
+.type-filter,
+.rating-filter {
+  margin-right: 1%;
+}
+
+.price-filter {
+  cursor: pointer;
+}
+.type-filter {
+  cursor: pointer;
+}
+.rating-filter {
+  cursor: pointer;
+}
+
 .search-results {
   position: relative;
   top: -50px;
@@ -49,7 +116,7 @@
 
 .searchPage__info {
   padding: 2% 5%;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   font-family: PeTra-Font-Normal;
 }
 
@@ -59,7 +126,6 @@
 }
 
 .searchPage__info > h1 {
-  margin-bottom: 30px;
   font-family: PeTra-Font-Medium;
 }
 
