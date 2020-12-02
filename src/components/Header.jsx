@@ -80,6 +80,10 @@ function Header(props) {
       LoggedIn: isLoggedIn,
     };
 
+    if (new Date(data.SDate).getTime() > new Date(data.EDate).getTime()) {
+      alert("Please Enter a Valid Check-in and Check-out Date");
+      return;
+    }
     if (!isLoggedIn)
       axios
         .post("http://localhost:3001/search/", data)

@@ -994,6 +994,7 @@ function Hotel(props) {
                       } else if (isLoggedIn && adultNumber === 0) {
                         setshowguests(true);
                       } else if (isLoggedIn && adultNumber !== 0) {
+                        history.push("/redirect");
                       } else if (!isLoggedIn) {
                         let temp = JSON.parse(sessionStorage.getItem("hotel"));
                         temp.props.sdate = document.querySelectorAll(

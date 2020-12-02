@@ -7,6 +7,8 @@ import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
 import Hotel from "./components/Product";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NotFound from "./components/NotFound";
+import Redirecting from "./components/Redirecting";
 
 function App() {
   return (
@@ -86,6 +88,12 @@ function App() {
           </Route>
           <Route exact path="/login">
             <SignUp type="in"></SignUp>
+          </Route>
+          <Route exact path="/redirect">
+            <Redirecting></Redirecting>
+          </Route>
+          <Route path="*">
+            <NotFound />
           </Route>
         </Switch>
       </Router>

@@ -88,7 +88,6 @@ function SearchPage(props) {
                 Price
               </div>
               <Dialog
-                disableBackdropClick
                 disableEscapeKeyDown
                 open={openPrice}
                 onClose={() => {
@@ -138,7 +137,6 @@ function SearchPage(props) {
                 Type
               </div>
               <Dialog
-                disableBackdropClick
                 disableEscapeKeyDown
                 open={openType}
                 onClose={() => {
@@ -217,7 +215,6 @@ function SearchPage(props) {
                 Rating
               </div>
               <Dialog
-                disableBackdropClick
                 disableEscapeKeyDown
                 open={openRating}
                 onClose={() => {
