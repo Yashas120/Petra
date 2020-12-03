@@ -31,6 +31,19 @@ function SignUp(props) {
             temp2.props.LoggedIn = true;
             sessionStorage.setItem("searchPageProps", JSON.stringify(temp1));
             sessionStorage.setItem("hotel", JSON.stringify(temp2));
+            sessionStorage.setItem(
+              "profile",
+              JSON.stringify({
+                pathname: "/auth/google/account",
+                props: {
+                  name: response.data.user.name,
+                  emailID: response.data.user.email,
+                  perks: response.data.user.perks,
+                  imageUrl: response.data.user.imageUrl,
+                  LoggedIn: true,
+                },
+              })
+            );
             history.push(temp2.pathname);
           } else {
             sessionStorage.setItem(

@@ -1,21 +1,44 @@
-.thank-h1 {
+.thank > #thank-h1 {
   display: flex;
+  position: absolute;
   font-family: PeTra-Font-Normal;
   font-size: 70px;
   text-shadow: 0.5px 1px #0046d5;
+  color: rgba(43, 46, 255, 0.863);
   top: 30%;
   left: 50%;
   transform: translate(-49%, -30%);
   align-items: center;
   text-align: center;
+  pointer-events: none;
 }
 
+#redh1 {
+  position: absolute;
+  font-family: PeTra-Font-Normal;
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: uppercase;
+  left: 49%;
+  top: 56%;
+  margin-left: -20px;
+  color: rgba(43, 46, 255, 0.863);
+  pointer-events: none;
+}
+
+.Redirecting-body {
+  position: absolute;
+  top: 50%;
+  margin-left: -50px;
+  left: 50%;
+  animation: speeder 0.4s linear infinite;
+}
 .thank {
   height: 100vh;
   width: 100vw;
 }
 
-#homepage {
+#redirect_homepage {
   position: relative;
   top: 60%;
   left: 40%;
@@ -31,13 +54,14 @@
   border-radius: 40px;
   border: none;
   transition: all 0.15s linear;
+  cursor: pointer;
 }
 
-#account {
+#redirect_account {
   position: relative;
   top: 60%;
   right: -40%;
-  transform: translate(45%, -53%);
+  transform: translate(55%, -53%);
   font-size: 20px;
   text-decoration: none;
   text-transform: uppercase;
@@ -49,36 +73,21 @@
   border-radius: 40px;
   border: none;
   transition: all 0.15s linear;
+  cursor: pointer;
 }
 
-#homepage:hover {
+#redirect_homepage:hover {
   color: white;
   background: blue;
+  box-shadow: 15px 10px 15px -2px gray;
 }
 
-#account:hover {
+#redirect_account:hover {
   color: white;
   background: blue;
+  box-shadow: 15px 10px 15px -2px gray;
 }
 
-.thank-h1 {
-  position: absolute;
-  font-family: PeTra-Font-Normal;
-  font-weight: 600;
-  font-size: 20px;
-  text-transform: uppercase;
-  left: 49%;
-  top: 56%;
-  margin-left: -20px;
-  color: rgba(43, 46, 255, 0.863);
-}
-.Redirecting-body {
-  position: absolute;
-  top: 50%;
-  margin-left: -50px;
-  left: 50%;
-  animation: speeder 0.4s linear infinite;
-}
 .Redirecting-body > span {
   height: 5px;
   width: 35px;

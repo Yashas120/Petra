@@ -447,7 +447,7 @@
 .hotel-check-in-out {
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid black;
+  border: 1px solid gray;
   width: fit-content;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -464,7 +464,7 @@
   flex: 2;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid gray;
 }
 
 .hotel-Check-in {
@@ -473,14 +473,16 @@
   width: 49.5%;
   align-items: center;
   justify-content: center;
+  margin-left: 10px;
 }
 
 .hotel-Check-in > input {
   outline: none;
   width: 100%;
+  /* margin-left: 2px; */
 }
 .hotel-Check-out {
-  border-left: 1px solid black;
+  border-left: 1px solid gray;
   padding: 2%;
   width: 49.5%;
   height: max-content;
@@ -524,16 +526,15 @@
 }
 
 .hotel-guest-menu {
-  position: absolute;
-  margin-top: -20px;
-  border-radius: 20px;
-  padding: 2%;
-  width: 300px;
+  position: relative;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 5%;
   background-color: white;
   height: fit-content;
-  width: 76%;
+  width: 100%;
   z-index: 20;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   align-items: center;
 }
 
@@ -679,6 +680,7 @@
   padding: 24% 0%;
   text-align: center;
   background-color: white;
+  font-family: PeTra-Font-Medium;
 }
 
 .petra-logo {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./styles/Redirecting.css";
-import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 function Redirecting() {
   const [seconds, setSeconds] = useState(0);
@@ -20,33 +19,33 @@ function Redirecting() {
     if (active) {
       return (
         <div>
-          <div class="Redirecting-body">
+          <div className="Redirecting-body">
             <span>
               <span></span>
               <span></span>
               <span></span>
               <span></span>
             </span>
-            <div class="base">
+            <div className="base">
               <span></span>
-              <div class="face"></div>
+              <div className="face"></div>
             </div>
           </div>
-          <div class="longfazers">
+          <div className="longfazers">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
           </div>
-          <h1>Redirecting ....</h1>
+          <h1 id="redh1">Redirecting ....</h1>
         </div>
       );
     } else {
       return (
-        <div class="thank">
-          <h1 className="thank-h1">Thank you for Booking with us</h1>
+        <div className="thank">
+          <h1 id="thank-h1">Thank you for Booking with us</h1>
           <Link to="/">
-            <button id="homepage" type="button">
+            <button id="redirect_homepage" type="button">
               Homepage
             </button>
           </Link>
@@ -59,7 +58,7 @@ function Redirecting() {
               },
             }}
           >
-            <button id="account" type="button">
+            <button id="redirect_account" type="button">
               {" "}
               Account
             </button>

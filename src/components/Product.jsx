@@ -125,62 +125,6 @@ function Hotel(props) {
       </Box>
     );
   }
-
-  // let images = [
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/sitter/Hotel2-sitter2.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel1-spa4.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel1-spa1.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel4-spa3.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel1-spa5.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/sitter/Hotel2-sitter2.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel1-spa4.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel1-spa1.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel4-spa3.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  //   {
-  //     src: "http://localhost:3001/Hotels/Bangalore/spa/Hotel1-spa5.jpg",
-  //     width: 1,
-  //     height: 1,
-  //   },
-  // ];
-  // const [hotelImages, setHotelImages] = useState({});
-  // const [sitterImaes, setSitterImages] = useState({});
-  // const [spaImages, setSpaImages] = useState({});
   let hotelImages = {};
   let sitterImages = {};
   let spaImages = {};
@@ -188,15 +132,12 @@ function Hotel(props) {
     hotelImages = id.images.map((image, index) => {
       return { src: image.url, width: 1, height: 1 };
     });
-    // setHotelImages(temp);
     sitterImages = id.sitter_images.map((image, index) => {
       return { src: image.url, width: 1, height: 1 };
     });
-    // setSitterImages(temp);
     spaImages = id.spa_images.map((image, index) => {
       return { src: image.url, width: 1, height: 1 };
     });
-    // setSpaImages(temp);
   }
 
   return (
@@ -760,13 +701,13 @@ function Hotel(props) {
               <div
                 className="rightpane"
                 onClick={() => {
-                  if (showguests) setshowguests(false);
+                  // if (showguests) setshowguests(false);
                 }}
               >
                 <div
                   className="checkout-card"
                   onClick={() => {
-                    if (showguests) setshowguests(false);
+                    // if (showguests) setshowguests(false);
                   }}
                 >
                   <div className="checkout-title">
@@ -986,78 +927,88 @@ function Hotel(props) {
                       </div>
                     ) : null}
                   </div>
-                  <div
-                    className="reserve"
-                    onClick={() => {
-                      if (!isLoggedIn && adultNumber === 0) {
-                        setshowguests(true);
-                      } else if (isLoggedIn && adultNumber === 0) {
-                        setshowguests(true);
-                      } else if (isLoggedIn && adultNumber !== 0) {
-                        history.push("/redirect");
-                      } else if (!isLoggedIn) {
-                        let temp = JSON.parse(sessionStorage.getItem("hotel"));
-                        temp.props.sdate = document.querySelectorAll(
-                          "#date-picker"
-                        )[0].value;
-                        temp.props.edate = document.querySelectorAll(
-                          "#date-picker"
-                        )[1].value;
-                        temp.props.adults = adultNumber;
-                        temp.props.infants = infantNumber;
-                        temp.props.childern = childernNumber;
-                        temp.props.pets = petNumber;
-                        sessionStorage.setItem("hotel", JSON.stringify(temp));
-                        history.push("/login");
-                      }
-                    }}
-                  >
-                    Reserve
-                  </div>
-                  <div className="reserve-message">
-                    <p> You wont be charged as yet </p>
-                  </div>
-                  <div className="cost">
-                    <p>
-                      &#8377;{Number(id.ppn)} x{" "}
-                      {(edate.getTime() - sdate.getTime()) /
-                        (1000 * 60 * 60 * 24)}{" "}
-                      Nights : &#8377;
-                      {(Number(id.ppn) * (edate.getTime() - sdate.getTime())) /
-                        (1000 * 60 * 60 * 24)}
-                    </p>
-                    <p>Service fee : &#8377;{id.service_fee}</p>
-                    <p>Other Charges : &#8377;{id.taxes}</p>
-                    {petNumber ? (
-                      <p>
-                        Pet Charges (for 5 hours/day) : &#8377;
-                        {(withspa ? Number(id.spa_cost) : 0) * 5 +
-                          (withsitter ? Number(id.sitter_cost) : 0) * 5}
-                      </p>
-                    ) : null}
-                  </div>
-                  <div
-                    className="host-contact"
-                    onClick={() => {
-                      setshowhostcontact(true);
-                    }}
-                  >
-                    <p>Contact Host</p>
-                  </div>
-                  <div className="total-price">
-                    <p className="totalamt">Total Amount</p>
-                    <p className="totalamount">
-                      {" "}
-                      &#8377;
-                      {((Number(id.ppn) +
-                        Number(id.service_fee) +
-                        Number(id.taxes) +
-                        (withspa ? Number(id.spa_cost) : 0) * 5 +
-                        (withsitter ? Number(id.sitter_cost) : 0) * 5) *
-                        (edate.getTime() - sdate.getTime())) /
-                        (1000 * 60 * 60 * 24)}
-                    </p>
-                  </div>
+                  {!showguests ? (
+                    <div>
+                      <div
+                        className="reserve"
+                        onClick={() => {
+                          if (!isLoggedIn && adultNumber === 0) {
+                            setshowguests(true);
+                          } else if (isLoggedIn && adultNumber === 0) {
+                            setshowguests(true);
+                          } else if (isLoggedIn && adultNumber !== 0) {
+                            history.push("/redirect");
+                          } else if (!isLoggedIn) {
+                            let temp = JSON.parse(
+                              sessionStorage.getItem("hotel")
+                            );
+                            temp.props.sdate = document.querySelectorAll(
+                              "#date-picker"
+                            )[0].value;
+                            temp.props.edate = document.querySelectorAll(
+                              "#date-picker"
+                            )[1].value;
+                            temp.props.adults = adultNumber;
+                            temp.props.infants = infantNumber;
+                            temp.props.childern = childernNumber;
+                            temp.props.pets = petNumber;
+                            sessionStorage.setItem(
+                              "hotel",
+                              JSON.stringify(temp)
+                            );
+                            history.push("/login");
+                          }
+                        }}
+                      >
+                        Reserve
+                      </div>
+                      <div className="reserve-message">
+                        <p> You wont be charged as yet </p>
+                      </div>
+                      <div className="cost">
+                        <p>
+                          &#8377;{Number(id.ppn)} x{" "}
+                          {(edate.getTime() - sdate.getTime()) /
+                            (1000 * 60 * 60 * 24)}{" "}
+                          Nights : &#8377;
+                          {(Number(id.ppn) *
+                            (edate.getTime() - sdate.getTime())) /
+                            (1000 * 60 * 60 * 24)}
+                        </p>
+                        <p>Service fee : &#8377;{id.service_fee}</p>
+                        <p>Other Charges : &#8377;{id.taxes}</p>
+                        {petNumber ? (
+                          <p>
+                            Pet Charges (for 5 hours/day) : &#8377;
+                            {(withspa ? Number(id.spa_cost) : 0) * 5 +
+                              (withsitter ? Number(id.sitter_cost) : 0) * 5}
+                          </p>
+                        ) : null}
+                      </div>
+                      <div
+                        className="host-contact"
+                        onClick={() => {
+                          setshowhostcontact(true);
+                        }}
+                      >
+                        <p>Contact Host</p>
+                      </div>
+                      <div className="total-price">
+                        <p className="totalamt">Total Amount</p>
+                        <p className="totalamount">
+                          {" "}
+                          &#8377;
+                          {((Number(id.ppn) +
+                            Number(id.service_fee) +
+                            Number(id.taxes) +
+                            (withspa ? Number(id.spa_cost) : 0) * 5 +
+                            (withsitter ? Number(id.sitter_cost) : 0) * 5) *
+                            (edate.getTime() - sdate.getTime())) /
+                            (1000 * 60 * 60 * 24)}
+                        </p>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
