@@ -2,7 +2,6 @@ import React from "react";
 import "./styles/Home.css";
 import Card from "./Card";
 import { withRouter } from "react-router-dom";
-import Masonry from "react-masonry-component";
 import Gallery from "react-photo-gallery";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";

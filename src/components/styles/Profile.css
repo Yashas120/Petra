@@ -12,7 +12,7 @@
 .side-bar {
   background-color: rgba(67, 67, 179, 0.856);
   color: white;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: PeTra-Font-Normal;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -29,14 +29,14 @@
   top: 0px;
   padding: 10%;
   font-size: 50px;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: PeTra-Font-Normal;
 }
 
 .side-bar > h3 {
   position: relative;
   top: 20px;
   left: -10px;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: PeTra-Font-Normal;
   margin: 0px;
   color: white;
 }
@@ -63,14 +63,14 @@
   margin: 10px;
   padding: 5%;
   margin-left: 50px;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: PeTra-Font-Normal;
 }
 
 .sign-out-btn,
 .back-btn,
 .close-account-btn {
   color: white;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: PeTra-Font-Normal;
 }
 
 .right-container-account {
@@ -80,7 +80,7 @@
   width: 75%;
   background-color: white;
   padding: 0%;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: PeTra-Font-Normal;
   align-items: center;
   justify-content: center;
 }
@@ -96,7 +96,7 @@
   margin: auto;
   height: fit-content;
   width: max-content;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: PeTra-Font-Normal;
 }
 
 .tab-items > p {
@@ -111,12 +111,15 @@
 
 .booking-list {
   position: absolute;
+  display: flex;
   top: 10%;
   left: 0%;
   width: 100%;
   height: 90vh;
   max-height: 90vh;
   background-color: white;
+  justify-content: center;
+  text-align: center;
 }
 
 .hotel-items {

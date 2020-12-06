@@ -5,12 +5,50 @@ import Footer from "./components/Footer";
 import SearchPage from "./components/SearchPage";
 import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
-import Hotel from "./components/Product";
+import Landing from "./components/Landing";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState } from "react";
 import NotFound from "./components/NotFound";
+import Hotel from "./components/Product";
 import Redirecting from "./components/Redirecting";
 
+function Preload(props) {
+  return props.isLanding ? (
+    <div className="landing">
+      <Landing />
+    </div>
+  ) : null;
+}
+
 function App() {
+  const [showLand, setShowLand] = useState(
+    "home" in sessionStorage
+      ? JSON.parse(sessionStorage.getItem("home")).showLand
+      : true
+  );
+  function Landed() {
+    const homepage = document.querySelector(".homepage");
+    const landing = document.querySelector(".landing");
+    var count = 0;
+    if (showLand) {
+      landing.addEventListener("animationend", function () {
+        if (count >= 5) {
+          setShowLand(() => {
+            sessionStorage.setItem("home", JSON.stringify({ showLand: false }));
+            return false;
+          });
+          landing.classList.add("landingfinish");
+          landing.style.backgroundColor = "white";
+          homepage.classList.add("homepage_ready");
+        } else count++;
+      });
+    } else {
+      homepage.style.visibility = "visible";
+      homepage.style.opacity = 1;
+      homepage.style.backgroundColor = "white";
+      homepage.style.pointerEvents = "initial";
+    }
+  }
   return (
     <div className="App">
       <Router>
@@ -41,9 +79,12 @@ function App() {
           ></Route>
 
           <Route exact path="/">
-            <Header LoggedIn={false}></Header>
-            <Home></Home>
-            <Footer></Footer>
+            <Preload isLanding={showLand}></Preload>
+            <div className="homepage" onLoad={Landed}>
+              <Header></Header>
+              <Home></Home>
+              <Footer></Footer>
+            </div>
           </Route>
           <Route
             exact

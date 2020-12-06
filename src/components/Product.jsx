@@ -21,8 +21,7 @@ import AddIcon from "@material-ui/icons/Add";
 import SubIcon from "@material-ui/icons/Remove";
 import Checkbox from "@material-ui/core/Checkbox";
 import axios from "axios";
-import { withRouter, useHistory, useLocation, Link } from "react-router-dom";
-import { Carousel } from "react-responsive-carousel";
+import { withRouter, useHistory, useLocation } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import Gallery from "react-photo-gallery";
@@ -83,13 +82,11 @@ function Hotel(props) {
       ? JSON.parse(sessionStorage.getItem("hotel")).props.pets
       : 0
   );
-  const [isLoggedIn, setIsLoggedIn] = useState(
+  const [isLoggedIn] = useState(
     "hotel" in sessionStorage
       ? JSON.parse(sessionStorage.getItem("hotel")).props.LoggedIn
       : 0
   );
-  const [select_spa, setselect_spa] = useState(false);
-  const [select_sitter, setselect_sitter] = useState(false);
 
   useEffect(() => {
     async function getData() {

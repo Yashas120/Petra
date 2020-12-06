@@ -12,7 +12,7 @@ import DatePicker from "./DatePicker";
 import axios from "axios";
 import { Link, useHistory, withRouter } from "react-router-dom";
 
-function Header(props) {
+function Header() {
   const [showDiv, setShowDiv] = useState(false);
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
   const [adultNumber, setAdultNumber] = useState(
@@ -40,11 +40,7 @@ function Header(props) {
       ? JSON.parse(sessionStorage.getItem("searchPageProps")).props.Query
       : ""
   );
-  const [searchValue, setSearchValue] = useState([
-    "Bangalore, India",
-    "Chennai, India",
-    "Mumbai, India",
-  ]);
+  const [searchValue] = useState(["Bangalore, India", "Chennai, India"]);
   const [sdate, setsdate] = useState(new Date());
   const [edate, setedate] = useState(
     new Date(new Date().getTime() + 1000 * 60 * 60 * 24)

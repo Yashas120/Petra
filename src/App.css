@@ -38,3 +38,28 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.landing {
+  opacity: 1;
+  transition: visibility 1s ease, opacity 0.5s ease;
+}
+
+.homepage {
+  background-color: white;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.landingfinish {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.homepage_ready {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 2.5s ease, opacity 1s ease;
+  pointer-events: initial;
+}

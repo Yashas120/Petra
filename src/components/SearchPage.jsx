@@ -259,9 +259,6 @@ function SearchPage(props) {
             </div>
             <div className="search-results">
               {propContents.props.results.map((result) => {
-                {
-                  /* console.log(Number(result.star), Number(result.price)); */
-                }
                 if (
                   Number(result.star) <= ratingValue[1] / 20 &&
                   Number(result.star) >= ratingValue[0] / 20 &&
