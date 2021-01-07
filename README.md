@@ -8,11 +8,11 @@ Backend for the website is present in [PeTra Backend](https://github.com/iVishal
 
 ## Contributors
 
-1. Vishal R*
-2. T Vijay Prashant*
-3. Yashas K S*
+1. [Vishal R*](https://github.com/iVishalr)
+2. [T Vijay Prashant*](https://github.com/tvijayprashant)
+3. [Yashas K S*](https://github.com/yashas120)
 
-* Equal Contributions
+ (*) Equal Contributions
 
 
 
