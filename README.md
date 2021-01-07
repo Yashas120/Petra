@@ -1,6 +1,21 @@
 # PeTra
 
-**README will be updated soon!**
+A simple website for booking hotels and sitter for your pets.
+
+This is a part of Web Technologies - I Course (UE19CS204)
+
+Backend for the website is present in [PeTra Backend](https://github.com/iVishalr/petra-backend)
+
+## Contributors
+
+1. Vishal R*
+2. T Vijay Prashant*
+3. Yashas K S*
+
+* Equal Contributions
+
+
+
 
 # Getting Started with Create React App
 
