@@ -1,6 +1,6 @@
 # PeTra
 
-A simple website for booking hotels and sitter for your pets.
+A simple website for booking hotels and sitters for your pets.
 
 This is a part of Web Technologies - I Course (UE19CS204)
 
